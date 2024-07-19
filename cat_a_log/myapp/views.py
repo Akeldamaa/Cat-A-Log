@@ -4,6 +4,11 @@ from web3 import Web3
 import openai
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.template import loader
+
+
 
 @api_view(['POST'])
 def upload_image(request):
@@ -26,3 +31,23 @@ def analyze_image(request):
 def mint_nft(request):
     # Add code to interact with Web3 and mint NFT
     return JsonResponse({'message': 'NFT minted successfully'})
+
+def index(request):
+    context = {}
+    return render(request, 'index.html', context)
+
+def login(request):
+    context = {}
+    return render(request, 'login.html', context)
+
+def signup(request):
+    context = {}
+    return render(request, 'signup-page.html', context)
+
+def user_dashboard(request):
+    context = {}
+    return render(request, 'user-dashboard.html', context)
+
+def collection(request):
+    context = {}
+    return render(request, 'collection.html', context)
