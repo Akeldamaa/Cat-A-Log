@@ -25,8 +25,8 @@ The app aims to provide a fun and engaging platform for cat enthusiasts to colle
 ## File Structure
 
 The project is broken down into the following directories:
-  - Frontend - Contains the client part of the app built with React 
-  - Backend - Contain the server part of the app built with Django
+  - Frontend - contains the client part of the app built with React 
+  - Backend - contains the server part of the app built with Django
 
 ## Setup
 
