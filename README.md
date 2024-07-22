@@ -35,5 +35,7 @@ The project is broken down into the following directories:
   - To run the frontend, change your directory using ```cd frontend``` and follow the instructions [here](./frontend/README.md)
   -  To run the backend, change your directory using ```cd backend``` and follow the instructions [here](./backend/README.md)
 
+## Contributors
+Check [NAMES.md](./NAMES.md)
 
 
