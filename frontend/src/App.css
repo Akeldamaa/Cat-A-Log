@@ -50,7 +50,7 @@ body {
 }
 
 .nav-link:hover {
-  color: #ff69b4;
+  color: #771d4a;
 }
 
 /* Avatar */
@@ -319,7 +319,7 @@ body {
 }
 
 .active {
-  background-color: #ff69b4;
+  background-color: #c94888;
   color: #fff;
 }
 

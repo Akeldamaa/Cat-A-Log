@@ -4,6 +4,7 @@ import { Button } from "./components/ui/Button";
 import { Label } from "./components/ui/Label";
 import { Input } from "./components/ui/Input";
 import "./App.css";
+import FileUpload from './components/FileUpload';
 
 const App = () => {
   const [catData, setCatData] = useState({
