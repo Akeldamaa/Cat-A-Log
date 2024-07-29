@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/Avatar";
 import { Button } from "./components/ui/Button";
 import { Label } from "./components/ui/Label";
 import { Input } from "./components/ui/Input";
 import "./App.css";
+import FileUpload from './components/FileUpload';
+import ProgressBar from "./components/ProgressBar";
 
 const App = () => {
   const [catData, setCatData] = useState({
@@ -20,6 +22,12 @@ const App = () => {
     elements: [],
   });
   const [nftMinting, setNftMinting] = useState({ blockchain: "Ethereum" });
+
+  //placeholder for progress bar interval - Abby Boggs 7/25/2024
+  const [completed, setCompleted] = useState()
+  useEffect(() => {
+   setInterval(() => setCompleted(Math.floor(Math.random() * 100) +1), 100);
+  }, []);
 
   const handleImageUpload = (files) => {
     // Function to handle image upload
@@ -114,6 +122,9 @@ const App = () => {
                     <div className="image-loading">
                       <LoaderIcon className="loading-icon" />
                       <span className="loading-text">Analyzing...</span>
+                      <div className="loading-bar">
+                        <ProgressBar bgcolor={"#6a1b9a"} completed={completed} />
+                      </div>
                     </div>
                   )}
                 </div>
