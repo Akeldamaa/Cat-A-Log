@@ -21,7 +21,7 @@ const App = () => {
     elements: [],
   });
   const [nftMinting, setNftMinting] = useState({ blockchain: "Ethereum" });
-
+ 
   const handleImageUpload = (files) => {
     // Function to handle image upload
   };
@@ -114,7 +114,9 @@ const App = () => {
                   ) : (
                     <div className="image-loading">
                       <LoaderIcon className="loading-icon" />
+                       <ProgressBar> </ProgressBar>
                       <span className="loading-text">Analyzing...</span>
+
                     </div>
                   )}
                 </div>
