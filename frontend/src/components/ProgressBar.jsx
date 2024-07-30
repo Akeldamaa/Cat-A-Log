@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
-const ProgressBar = (props) => {
-  const { bgcolor, completed } = props;
+const ProgressBar = () => {
+  const [progress, setProgress] = useState(0);
 
-  const containerStyles = {
-    height: 20,
-    width: '50%',
-    backgroundColor: "#e0e0de",
-    borderRadius: 50,
-    margin: 50,
-  }
+  useEffect(() => {
+    // Define the interval duration in milliseconds
+    const intervalDuration = 100; // Update every 100ms
+    
+    // Create an interval to update the progress
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          clearInterval(interval); // Stop the interval when reaching 100%
+          return 100;
+        }
+        return prevProgress + 1; // Increment progress
+      });
+    }, intervalDuration);
 
-  const fillerStyles = {
-    height: '100%',
-    width: `${completed}%`,
-    backgroundColor: bgcolor,
-    transition: 'width 1s ease-in-out',
-    borderRadius: 'inherit',
-    textAlign: 'right',
-  }
-
-  const labelStyles = {
-    padding: 5,
-    color: 'white',
-    fontWeight: 'bold',
-  }
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <span style={labelStyles}>{`${completed}%`}</span>
+    <div style={{ width: '100%', backgroundColor: '#e0e0e0', borderRadius: '4px', overflow: 'hidden' }}>
+      <div
+        style={{
+          width: `${progress}%`,
+          height: '30px',
+          backgroundColor: '#6a1b9a',
+          textAlign: 'center',
+          color: 'white',
+          lineHeight: '30px',
+          borderRadius: '4px',
+          transition: 'width 0.1s ease-in-out'
+        }}
+      >
+        {progress}%
       </div>
     </div>
   );
