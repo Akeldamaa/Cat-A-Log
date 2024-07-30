@@ -4,7 +4,8 @@ import { Button } from "./components/ui/Button";
 import { Label } from "./components/ui/Label";
 import { Input } from "./components/ui/Input";
 import "./App.css";
-import FileUpload from './components/FileUpload';
+import FileUpload from "./components/FileUpload";
+import TestApi from "./components/TestApi";
 
 const App = () => {
   const [catData, setCatData] = useState({
@@ -62,6 +63,7 @@ const App = () => {
         </div>
       </div>
       <div className="content">
+        <TestApi />
         <div className="section welcome">
           <h2 className="section-title">Cat-a-Log </h2>
           <p className="section-description">
@@ -533,4 +535,3 @@ const Clock3Icon = (props) => (
 );
 
 export default App;
-
