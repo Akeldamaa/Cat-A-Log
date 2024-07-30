@@ -4,9 +4,9 @@ import { Button } from "./components/ui/Button";
 import { Label } from "./components/ui/Label";
 import { Input } from "./components/ui/Input";
 import "./App.css";
-import FileUpload from './components/FileUpload';
+import FileUpload from "./components/FileUpload";
+import TestApi from "./components/TestApi";
 import ProgressBar from "./components/ProgressBar";
-
 
 const App = () => {
   const [catData, setCatData] = useState({
@@ -25,9 +25,9 @@ const App = () => {
   const [nftMinting, setNftMinting] = useState({ blockchain: "Ethereum" });
 
   //placeholder for progress bar interval - Abby Boggs 7/25/2024
-  const [completed, setCompleted] = useState()
+  const [completed, setCompleted] = useState();
   useEffect(() => {
-    setInterval(() => setCompleted(Math.floor(Math.random() * 100) +1), 100);
+    setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 100);
   }, []);
 
   const handleImageUpload = (files) => {
@@ -70,6 +70,7 @@ const App = () => {
         </div>
       </div>
       <div className="content">
+        <TestApi />
         <div className="section welcome">
           <h2 className="section-title">Cat-a-Log </h2>
           <p className="section-description">
@@ -124,7 +125,10 @@ const App = () => {
                       <LoaderIcon className="loading-icon" />
                       <span className="loading-text">Analyzing...</span>
                       <div className="loading-bar">
-                        <ProgressBar bgcolor={"#6a1b9a"} completed={completed} />
+                        <ProgressBar
+                          bgcolor={"#6a1b9a"}
+                          completed={completed}
+                        />
                       </div>
                     </div>
                   )}
@@ -544,4 +548,3 @@ const Clock3Icon = (props) => (
 );
 
 export default App;
-
