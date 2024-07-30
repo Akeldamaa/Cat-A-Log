@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 
-const LoadingBar = () => {
-  const [progress, setProgress] = useState(0);
+const ProgressBar = (props) => {
+  const { bgcolor, completed } = props;
 
-  useEffect(() => {
-    // Update the progress every 100ms (0.1 seconds)
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 100);
+  const containerStyles = {
+    height: 20,
+    width: '50%',
+    backgroundColor: "#e0e0de",
+    borderRadius: 50,
+    margin: 50,
+  }
 
-    // Cleanup the interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
+  const fillerStyles = {
+    height: '100%',
+    width: `${completed}%`,
+    backgroundColor: bgcolor,
+    transition: 'width 1s ease-in-out',
+    borderRadius: 'inherit',
+    textAlign: 'right',
+  }
+
+  const labelStyles = {
+    padding: 5,
+    color: 'white',
+    fontWeight: 'bold',
+  }
 
   return (
-    <div style={styles.container}>
-      <div style={{ ...styles.loadingBar, width: `${progress}%` }} />
+    <div style={containerStyles}>
+      <div style={fillerStyles}>
+        <span style={labelStyles}>{`${completed}%`}</span>
+      </div>
     </div>
   );
 };
 
-const styles = {
-  container: {
-    width: '100%',
-    height: '30px',
-    backgroundColor: '#f3f3f3',
-    borderRadius: '5px',
-    overflow: 'hidden',
-  },
-  loadingBar: {
-    height: '100%',
-    backgroundColor: 'purple',
-    transition: 'width 0.1s linear',
-  },
-};
-
-export default LoadingBar;
+export default ProgressBar;
