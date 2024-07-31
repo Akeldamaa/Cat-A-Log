@@ -1,27 +1,28 @@
 import React from 'react';
+import "./Home.css";
 import { Link } from 'react-router-dom';
+import Navbar from '../HomePageNavbar';
 
-export default function Home(){
+export default function Home() {
     return (
-        <>
-            <h1>Home page</h1>
-            <ul>
-                <li>
-                    <Link to="/login">Login</Link>
-                </li>
-                <li>
-                    <Link to='/user-dashboard'>User Dashboard</Link>
-                </li>
-                <li>
-                    <Link to='/about'>Future link to About Page</Link>
-                </li>
-                <li>
-                    <Link to='/examples'>Future Link to Examples Page</Link>
-                </li>
-                <li>
-                    <Link to="/featured-shelter">Future link to Featured Shelter</Link>
-                </li>
-            </ul>
-        </>
+        <div className="home-container">
+            <div className="banner">
+                <h1>Cat-A-Log</h1>
+            </div>
+            <div className='navbar'>
+                <Navbar />
+            </div>
+            <div className='home-section'>
+                <h2>Welcome!</h2>
+                <p>
+                    This app allows you to upload images of your cats, analyze their
+                    features using AI, customize them with stickers and elements, and
+                    even mint them as NFTs on the blockchain. Explore our page, or create an
+                    account to start!
+                </p>
+            </div>
+        </div>
+
+
     )
 }

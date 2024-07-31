@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
-
+import "./App.css";
 import UserDashboard from "./components/pages/UserDashboard";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
