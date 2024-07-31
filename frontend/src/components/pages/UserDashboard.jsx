@@ -15,7 +15,7 @@ const App = () => {
     age: "",
     gender: "",
   });
-  
+
   const [uploadedImages, setUploadedImages] = useState([]);
   const [pastCreations, setPastCreations] = useState([]);
   const [currentCollection, setCurrentCollection] = useState([]);
@@ -44,19 +44,19 @@ const App = () => {
     <div className="app-container">
       <div className="sidebar">
         <nav className="nav">
-          <a href="#" className="nav-link">
+          <a href="/" className="nav-link">
             Home
           </a>
-          <a href="#" className="nav-link">
+          <a href="user-dashboard/upload" className="nav-link">
             Upload
           </a>
-          <a href="#" className="nav-link">
+          <a href="user-dashboard/analysis" className="nav-link">
             Analysis
           </a>
-          <a href="#" className="nav-link">
+          <a href="user-dashboard/customization" className="nav-link">
             Customization
           </a>
-          <a href="#" className="nav-link">
+          <a href="user-dashboard/nft-minting" className="nav-link">
             NFT Minting
           </a>
         </nav>
