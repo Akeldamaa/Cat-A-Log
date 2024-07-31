@@ -12,6 +12,15 @@ export default function Home(){
                 <li>
                     <Link to='/user-dashboard'>User Dashboard</Link>
                 </li>
+                <li>
+                    <Link to='/about'>Future link to About Page</Link>
+                </li>
+                <li>
+                    <Link to='/examples'>Future Link to Examples Page</Link>
+                </li>
+                <li>
+                    <Link to="/featured-shelter">Future link to Featured Shelter</Link>
+                </li>
             </ul>
         </>
     )
