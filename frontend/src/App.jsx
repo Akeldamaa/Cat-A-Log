@@ -7,6 +7,8 @@ import Login from "./components/pages/Login";
 import About from "./components/pages/About";
 import Examples from "./components/pages/Examples";
 import FeaturedShelter from "./components/pages/FeaturedShelter";
+import Signup from "./components/pages/Signup";
+import ForgotPassword from "./components/pages/ForgotPassword";
 
 export default function App() {
   return (
@@ -14,10 +16,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path='signup' element={<Signup />}/>
         <Route path="user-dashboard" element={<UserDashboard />} />
         <Route path="about" element={<About />}/>
         <Route path="examples" element={<Examples />}/>
         <Route path="featured-shelter" element={<FeaturedShelter />}/>
+        <Route path="forgot-password" element={<ForgotPassword />}/>
         {/* Add more paths here in future */}
       </Routes>
     </div>

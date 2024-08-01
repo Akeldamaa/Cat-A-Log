@@ -12,16 +12,19 @@ export default function HomeNavbar() {
                     <a href="/login" className='nav-link'>Login</a>
                 </li>
                 <li>
+                    <a href='/signup' className='nav-link'>Sign up</a>
+                </li>
+                <li>
                     <a href="/user-dashboard" className='nav-link'>User Dashboard</a>
                 </li>
                 <li>
-                    <a href="/about" className='nav-link'>Future link to About Page</a>
+                    <a href="/about" className='nav-link'>About</a>
                 </li>
                 <li>
-                    <a href="/examples" className='nav-link'>Future Link to Examples Page</a>
+                    <a href="/examples" className='nav-link'>Examples</a>
                 </li>
                 <li>
-                    <a href="/featured-shelter" className='nav-link'>Future link to Featured Shelter</a>
+                    <a href="/featured-shelter" className='nav-link'>Featured Shelter</a>
                 </li>
             </ul>
         </nav>
