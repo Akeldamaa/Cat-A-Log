@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Button } from './ui/Button'; 
+import { useState } from "react";
+import axios from "axios";
+import { Button } from "./ui/Button";
 
 const FileUpload = ({ onUploadSuccess }) => {
   const [file, setFile] = useState(null);
@@ -12,17 +12,17 @@ const FileUpload = ({ onUploadSuccess }) => {
   const handleFileUpload = async () => {
     if (file) {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
       try {
-        const response = await axios.post('/api/upload', formData, {
+        const response = await axios.post("/api/upload", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         });
         onUploadSuccess(response.data);
       } catch (error) {
-        console.error('Error uploading file:', error);
+        console.error("Error uploading file:", error);
       }
     }
   };

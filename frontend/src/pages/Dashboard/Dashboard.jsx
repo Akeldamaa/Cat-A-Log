@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/Avatar";
-import { Button } from "../ui/Button";
-import { Label } from "../ui/Label";
-import { Input } from "../ui/Input";
-import "./UserDashboard.css";
-import FileUpload from "../FileUpload";
-import TestApi from "../TestApi";
-import ProgressBar from "../ProgressBar";
+import { useState } from "react";
+import "./Dashboard.css";
+// import TestApi from "../TestApi";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../components/ui/Avatar";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/forms/Input";
+import TestApi from "../../components/TestApi";
+import ProgressBar from "../../components/ProgressBar";
 
-const App = () => {
+const DashBoard = () => {
   const [catData, setCatData] = useState({
     breed: "",
     characteristics: "",
@@ -123,7 +126,7 @@ const App = () => {
                       <LoaderIcon className="loading-icon" />
                       <span className="loading-text">Analyzing...</span>
                       <div className="loading-bar">
-                        <ProgressBar/>
+                        <ProgressBar />
                       </div>
                     </div>
                   )}
@@ -204,9 +207,6 @@ const App = () => {
               </div>
             </div>
             <div className="form-group">
-              <Label htmlFor="characteristics" className="form-label">
-                Characteristics
-              </Label>
               <div className="form-control">
                 <Input
                   id="characteristics"
@@ -217,6 +217,7 @@ const App = () => {
                     setCatData({ ...catData, characteristics: e.target.value })
                   }
                   className="form-input"
+                  label={"characteristics"}
                 />
               </div>
             </div>
@@ -542,4 +543,4 @@ const Clock3Icon = (props) => (
   </svg>
 );
 
-export default App;
+export default DashBoard;

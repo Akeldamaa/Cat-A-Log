@@ -1,12 +1,11 @@
-import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import UserDashboard from "./components/pages/UserDashboard";
-import Home from "./components/pages/Home";
-import Login from "./components/pages/Login";
-import About from "./components/pages/About";
-import Examples from "./components/pages/Examples";
-import FeaturedShelter from "./components/pages/FeaturedShelter";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import DashBoard from "./pages/Dashboard/Dashboard";
+import About from "./pages/About/About";
+import Examples from "./pages/Examples/Examples";
+import FeaturedShelter from "./pages/FeaturedShelter/FeaturedShelter";
 
 export default function App() {
   return (
@@ -14,10 +13,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="user-dashboard" element={<UserDashboard />} />
-        <Route path="about" element={<About />}/>
-        <Route path="examples" element={<Examples />}/>
-        <Route path="featured-shelter" element={<FeaturedShelter />}/>
+        <Route path="dashboard" element={<DashBoard />} />
+        <Route path="about" element={<About />} />
+        <Route path="examples" element={<Examples />} />
+        <Route path="featured-shelter" element={<FeaturedShelter />} />
         {/* Add more paths here in future */}
       </Routes>
     </div>
