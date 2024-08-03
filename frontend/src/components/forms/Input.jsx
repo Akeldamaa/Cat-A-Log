@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./Input.css";
 
 export function Input({ className, id, label, ...props }) {
   return (
@@ -6,7 +7,7 @@ export function Input({ className, id, label, ...props }) {
       <label htmlFor={id} className={`label form-label`}>
         {label}
       </label>
-      <input className={`input ${className}`} {...props} id="" name="" />;
+      <input className={`input ${className}`} {...props} id="" name="" />
     </div>
   );
 }
