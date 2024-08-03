@@ -5,6 +5,7 @@
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s;
+  background: #fff;
 }
 
 .input:focus {
@@ -13,5 +14,10 @@
 
 .label {
   font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-label {
   margin-bottom: 5px;
 }
