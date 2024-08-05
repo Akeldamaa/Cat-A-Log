@@ -1,0 +1,27 @@
+/* Data Input Section */
+.data-input-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.form-input {
+  border: none;
+  background: #fff;
+  padding: 10px 20px;
+  outline: none;
+  width: 100%;
+  display: block;
+}

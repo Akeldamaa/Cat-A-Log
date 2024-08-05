@@ -1,0 +1,16 @@
+/* NFT Minting Section */
+.nft-minting-options {
+  display: flex;
+  gap: 20px;
+}
+
+.nft-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: #c94888;
+  color: #fff;
+}
