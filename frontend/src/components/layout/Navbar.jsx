@@ -15,23 +15,23 @@ export default function Navbar() {
           </a>
         </li>
         <li>
+          <a href="/signup" className="nav-link">
+            Sign Up
+          </a>
+        </li>
+        <li>
           <a href="/dashboard" className="nav-link">
-            Dashboard
+            Dashboard {/*Eventually only Accessible through the log in and sign up pages*/}
           </a>
         </li>
         <li>
           <a href="/about" className="nav-link">
-            Future link to About Page
-          </a>
-        </li>
-        <li>
-          <a href="/examples" className="nav-link">
-            Future Link to Examples Page
+            About
           </a>
         </li>
         <li>
           <a href="/featured-shelter" className="nav-link">
-            Future link to Featured Shelter
+            Featured Shelter
           </a>
         </li>
       </ul>
