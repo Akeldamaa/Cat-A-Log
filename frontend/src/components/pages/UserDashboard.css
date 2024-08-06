@@ -1,0 +1,325 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 100vh;
+  }
+
+  /* Layout */
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #ffc0cb;
+  color: #fff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  min-width: 200px;
+}
+
+.content {
+  flex: 3;
+  padding: 20px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #771d4a;
+}
+
+/* Avatar */
+.avatar-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Sections */
+.section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-description {
+  color: #555;
+}
+
+/* Upload Section */
+.upload-container {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.upload-text {
+  color: #ccc;
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload-button {
+  margin-top: 10px;
+}
+
+/* AI Analysis Section */
+.analysis-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-container {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.image-breed {
+  font-weight: bold;
+}
+
+.image-characteristics,
+.image-age,
+.image-gender {
+  color: #555;
+}
+
+.image-loading {
+  display: flex;
+  align-items: center;
+}
+
+.loading-icon {
+  margin-right: 5px;
+}
+
+/* Past Creations & Current Collection */
+.creations-container,
+.collection-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.creation-item,
+.collection-item {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.creation-image,
+.collection-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.creation-info,
+.collection-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.creation-name,
+.collection-name {
+  font-weight: bold;
+}
+
+.creation-details,
+.collection-details {
+  color: #555;
+}
+
+/* Data Input Section */
+.data-input-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 5px;
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.form-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+/* Customization Section */
+.customization-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.customization-group {
+  flex: 1;
+}
+
+.customization-title {
+  margin-bottom: 10px;
+}
+
+.customization-items {
+  display: flex;
+  gap: 10px;
+}
+
+.customization-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.customization-preview {
+  margin-top: 20px;
+}
+
+.preview-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.preview-sticker,
+.preview-element {
+  position: absolute;
+}
+
+/* Sticker Pack */
+.sticker-pack-container {
+  margin-top: 20px;
+}
+
+.sticker-pack-items {
+  display: flex;
+  gap: 10px;
+}
+
+.sticker-pack-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.sticker-pack-save {
+  margin-top: 10px;
+}
+
+/* NFT Minting Section */
+.nft-minting-options {
+  display: flex;
+  gap: 20px;
+}
+
+.nft-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: #c94888;
+  color: #fff;
+}
