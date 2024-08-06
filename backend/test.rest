@@ -1,17 +1,24 @@
-POST http://127.0.0.1:8000/api/member/signup 
+
+POST http://127.0.0.1:8000/api/auth/register/ 
 Content-Type: application/json
 
-{ "email": "adam@mail.com" , "password": "Pass1234!" }
+{ "email": "adam@gmail.com" , "password": "Pass1234" }
 
 ###
 
 POST http://127.0.0.1:8000/api/auth/login/
 Content-Type: application/json
 
-{ "email": "abcd@abc.com", "password": "abc12345" }
+{ "email": "adam@gmail.com", "password": "Pass1234" }
 
 ###
 
 GET http://127.0.0.1:8000/api/auth/user/ 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIyOTUzNzE0LCJpYXQiOjE3MjI5NTAxMTQsImp0aSI6IjkxOGVmMTFlZDIzODRkNDY5NDYyOWY5NTQ2M2I2NTMwIiwidXNlcl9pZCI6Mn0.njqwRnAoAQWpOkjGhJojJPe74jx1nIrV04SMloZjqt8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIyOTY5NTgyLCJpYXQiOjE3MjI5NjU5ODIsImp0aSI6ImRkMzg1NGFlNTY2NDRmNzJhZmUwY2Y2NDA2NTFhZGFjIiwidXNlcl9pZCI6NH0.PzEPEDX0Dt8YBJhXSe5KsSt_tkrwUdZqSaB9q0aJl2c
+
+###
+
+GET http://127.0.0.1:8000/api/auth/logout/ 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIyOTY5NTgyLCJpYXQiOjE3MjI5NjU5ODIsImp0aSI6ImRkMzg1NGFlNTY2NDRmNzJhZmUwY2Y2NDA2NTFhZGFjIiwidXNlcl9pZCI6NH0.PzEPEDX0Dt8YBJhXSe5KsSt_tkrwUdZqSaB9q0aJl2c
