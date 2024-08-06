@@ -7,7 +7,6 @@ import DashBoard from "./pages/Dashboard/Dashboard";
 import About from "./pages/About/About";
 import Examples from "./pages/Examples/Examples";
 import FeaturedShelter from "./pages/FeaturedShelter/FeaturedShelter";
-import Signup from "./pages/Signup/Signup";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 export default function App() {
