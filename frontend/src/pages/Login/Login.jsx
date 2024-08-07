@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import LoginForm from './components/LoginForm';
 
 const Login = () => {
     return (
@@ -17,11 +16,13 @@ const Login = () => {
                             <input type="password" placeholder="Password" className="login-input" />
                         </div>
                     </div>
+                    <div className="login-footer">
+                        <a href="forgot-password" className="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button>
+                        Login!
+                    </button>
                 </form>
-                <div className="login-footer">
-                    <a href="forgot-password" className="forgot-password">forgot password?</a>
-                    <a href="signup" className="signup-link">Already a member?</a>
-                </div>
             </div>
         </div>
     );
