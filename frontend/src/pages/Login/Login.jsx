@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import LoginForm from './components/LoginForm';
 
 const Login = () => {
     return (
@@ -20,7 +19,6 @@ const Login = () => {
                 </form>
                 <div className="login-footer">
                     <a href="forgot-password" className="forgot-password">forgot password?</a>
-                    
                 </div>
             </div>
         </div>
