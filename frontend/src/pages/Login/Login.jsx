@@ -19,7 +19,7 @@ const Login = () => {
                 </form>
                 <div className="login-footer">
                     <a href="forgot-password" className="forgot-password">forgot password?</a>
-                    <a href="signup" className="signup-link">Already a member?</a>
+                    
                 </div>
             </div>
         </div>
