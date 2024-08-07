@@ -1,11 +1,13 @@
 import React from 'react';
 import './Login.css';
+import LoginForm from './components/LoginForm';
 
 const Login = () => {
     return (
-        <div className="home-container">
-            <div>
-                <h1>Cat-A-Log</h1>
+        <div className="">
+            <div className='login-container'>
+                <LoginForm />
+                {/* <h1>Cat-A-Log</h1>
                 <form>
                     <div className="login-fields">
                         <div className="username">
@@ -19,14 +21,14 @@ const Login = () => {
                     </div>
                 </form>
                 <div className="forgot-password">
-                    <p><a href="forgot-password">Forgot Password?</a></p>
+                    <p><a href="/forgot-password">Forgot Password?</a></p>
                 </div>
                 <div className="login-button">
                     <button>Log in</button>
                 </div>
                 <div>
                     <button>Signup</button>
-                </div>
+                </div> */}
             </div>
         </div>
     )
