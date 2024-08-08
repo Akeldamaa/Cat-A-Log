@@ -3,13 +3,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f3e0e2;
+    width: 100vw;
     height: 100vh;
-    background-color: #f3e0e2; /* Soft pink background */
+    /* Soft pink background */
 }
 
 /* Card with the shape resembling a cat's ears */
 .login-card {
-    background-color: #f3f3f3; /* Light gray background */
+    background-color: #f3f3f3;
+    /* Light gray background */
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -19,14 +22,19 @@
 }
 
 .login-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
 }
 
+.login-subtitle {
+    color: #81c489;
+}
+
 .login-fields {
     margin-bottom: 20px;
+    color: #95b3ff;
 }
 
 .input-container {
@@ -46,19 +54,33 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    margin-top: 10px;
+    margin: 10px;
 }
 
-.forgot-password, .signup-link {
+.forgot-password,
+.signup-link {
     color: #333;
     text-decoration: none;
 }
 
-.forgot-password:hover, .signup-link:hover {
+.signup-section,
+.signup-link {
+    color: #333;
+    text-decoration: none;
+}
+
+.forgot-password:hover,
+.signup-link:hover {
     text-decoration: underline;
 }
 
-.login-card::before, .login-card::after {
+.signup-section:hover,
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.login-card::before,
+.login-card::after {
     content: '';
     position: absolute;
     width: 40px;
@@ -76,4 +98,21 @@
 .login-card::after {
     right: 30px;
     transform: rotate(-45deg);
+}
+
+.login-label {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.login-submit {
+    background-color: #81c489;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    border-color: none;
 }
