@@ -12,6 +12,33 @@ const Signup = () => {
         name: ""
     });
 
+    function test_input(){
+        console.log("Testing input")
+        let validInput = true;
+        if (signupInfo.password != signupInfo.confirmPassword){
+            validInput = false;
+            console.log("Passwords do not match");
+        }
+        if (signupInfo.username == ""){
+            validInput = false;
+        }
+        if (signupInfo.password == ""){
+            validInput = false;
+        }
+        if (signupInfo.confirmPassword == "") {
+            validInput = false;
+        }
+        if (signupInfo.email == ""){
+            validInput = false;
+        }   
+        if (signupInfo.name == ""){
+            validInput = false;
+        }
+        if(validInput == true){
+
+        }
+    }
+
     return (
         <div className="signup-container">
             <div className="signup-card">
@@ -80,7 +107,7 @@ const Signup = () => {
                         <a href="/login" className="login-link">Already a member?</a>
                     </div>
                     <div className="signup-button">
-                        <button className="signup-submit"> Sign up! </button>
+                        <button className="signup-submit" type="submit" onSubmit={test_input()}> Sign up! </button>
                     </div>
                 </form>
             </div>
