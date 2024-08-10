@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from "react";
 import './Login.css';
-import { Input } from '../../components/forms/Input';
 import LoginForm from './LoginForm';
 
 const Login = () => {
@@ -9,7 +8,7 @@ const Login = () => {
         username: "",
         password: "",
     });
-    
+   
     return (
         <div className="login-container">
             <div className="login-card">
