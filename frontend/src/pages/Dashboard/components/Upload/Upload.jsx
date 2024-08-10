@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "../../../../components/ui/Button";
 import { UploadIcon } from "../../../../components/ui/icons";
 import "./Upload.css";
@@ -6,6 +6,8 @@ import "./Upload.css";
 function Upload() {
   const [previewImages, setPreviewImages] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(null);
+  const [showSendOffButton, setShowSendOffButton] = useState(false); 
+  const fileInputRef = useRef(null); 
 
   const handleImageUpload = async (files) => {
     const fileArray = Array.from(files);
@@ -26,7 +28,7 @@ function Upload() {
       });
 
       if (response.ok) {
-        setUploadStatus("Upload successful!");
+        setShowSendOffButton(true); // Show "Send off" button after successful upload
       } else {
         setUploadStatus("Upload failed. Please try again.");
       }
@@ -36,6 +38,11 @@ function Upload() {
     }
   };
 
+  const handleSendOff = () => {
+    setUploadStatus("Upload successful!"); // Show success message when "Send off" button is clicked
+    setShowSendOffButton(false); // Hide the "Send off" button after it's clicked
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
     handleImageUpload(e.dataTransfer.files);
@@ -43,6 +50,13 @@ function Upload() {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  const handleButtonClick = () => {
+    // Programmatically trigger the file input click
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   return (
@@ -61,8 +75,10 @@ function Upload() {
             multiple
             className="upload-input"
             onChange={(e) => handleImageUpload(e.target.files)}
+            ref={fileInputRef} // Attach the ref to the file input
+            style={{ display: "none" }} // Hide the input field
           />
-          <Button variant="default" className="upload-button">
+          <Button variant="default" className="upload-button" onClick={handleButtonClick}>
             Upload
           </Button>
         </div>
@@ -74,6 +90,12 @@ function Upload() {
             <img key={index} src={src} alt={`Preview ${index}`} className="preview-image" />
           ))}
         </div>
+      )}
+
+      {showSendOffButton && (
+        <Button variant="default" onClick={handleSendOff} className="send-off-button">
+          Send off
+        </Button>
       )}
 
       {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
