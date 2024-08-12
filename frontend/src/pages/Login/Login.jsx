@@ -16,10 +16,13 @@ const Login = () => {
                             <input type="password" placeholder="Password" className="login-input" />
                         </div>
                     </div>
+                    <div className="login-footer">
+                        <a href="forgot-password" className="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button>
+                        Login!
+                    </button>
                 </form>
-                <div className="login-footer">
-                    <a href="forgot-password" className="forgot-password">forgot password?</a>
-                </div>
             </div>
         </div>
     );
