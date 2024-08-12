@@ -94,6 +94,7 @@ export default function SignupForm() {
                         Password
                     </label>
                     <input {...register("password")}
+                        type="password"
                         id="password"
                         className="login-input"
                         placeholder="Password"
@@ -105,6 +106,7 @@ export default function SignupForm() {
                         Confirm Password
                     </label>
                     <input {...register("confirmPassword")}
+                        type="password"
                         id="confirmPassword"
                         className="login-input"
                         placeholder="Confirm Password"
