@@ -7,6 +7,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
+}
+
+.upload-container.dragging {
+  border-color: #aaa;
+  background-color: #f0f0f0;
 }
 
 .upload-content {
@@ -32,4 +38,25 @@
 
 .upload-button {
   margin-top: 10px;
+}
+
+/* Preview Section */
+.preview-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
+.upload-status {
+  margin-top: 10px;
+  color: #333;
 }

@@ -1,3 +1,11 @@
+/* Ensure html and body take full height and width */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 /* General container styles */
 .login-container {
     display: flex;
@@ -6,7 +14,6 @@
     background-color: #ffc0cb;
     width: 100vw;
     height: 100vh;
-    /* Soft pink background */
 }
 
 /* Card with the shape resembling a cat's ears */
@@ -24,6 +31,12 @@
 .login-title {
     font-size: 30px;
     font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-size: 18px;
     color: #333;
     margin-bottom: 20px;
 }
@@ -84,7 +97,7 @@
     content: '';
     position: absolute;
     width: 40px;
-    height: 70px;
+    height: 40px;
     background-color: #f3f3f3;
     border-radius: 10px;
     top: -20px;
