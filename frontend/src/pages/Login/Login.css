@@ -129,3 +129,11 @@
     text-align: center;
     margin-top: 0px;
 }
+
+.text-success{
+    color: green;
+}
+
+.text-error{
+    color: red;
+}
