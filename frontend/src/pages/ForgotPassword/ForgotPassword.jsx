@@ -1,22 +1,20 @@
 import React from 'react';
+import { useState } from "react";
 import './ForgotPassword.css';
+import { Input } from '../../components/forms/Input';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const ForgotPassword = () => {
+    const [forgotPasswordEmail, setForgotPasswordEmail] = useState({
+        email: "",
+    });
+
     return (
         <div className="forgotpassword-container">
             <div className="forgotpassword-card">
                 <h1 className="forgotpassword-title">Cat-A-Log</h1>
                 <h2 className="forgotpassword-subtitle">Reset Password</h2>
-                <form>
-                    <div className="forgotpassword-fields">
-                        <div className="input-container">
-                            <input type="text" placeholder="Email" className="forgotpassword-input" />
-                        </div>
-                    </div>
-                </form>
-                <div className="forgotpassword-button">
-                        <button> Send Reset Link</button>
-                </div>
+                <ForgotPasswordForm></ForgotPasswordForm>
             </div>
         </div>
     );
