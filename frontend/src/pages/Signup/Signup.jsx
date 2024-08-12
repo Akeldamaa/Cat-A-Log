@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from "react";
 import './Signup.css';
-import { Input } from '../../components/forms/Input';
 import SignupForm from './SignupForm';
 
 const Signup = () => {

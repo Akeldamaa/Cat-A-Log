@@ -1,15 +1,31 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Signup.css"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { ref } from "yup";
 
 const schema = yup
     .object({
-        name: yup.string().max(12, "Name cannot exceed 30 characters.").required("Name cannot be blank."),
-        email: yup.string().email("Must be a valid email.").required("Email cannot be blank."),
-        username: yup.string().required("Username cannot be blank."),
-        password: yup.string().required("Password cannot be blank."),
-        confirmPassword: yup.string().required("Confirm Password cannot be blank."),
+        name: yup.string()
+            .required("Name cannot be blank.")
+            .matches(/^[A-Za-z.\s_-]+$/, "Can only be A-Z characters")
+            .min(3, "Name must be atleast 3 characters.")
+            .max(30, "Name cannot exceed 30 characters."),
+        email: yup.string()
+            .required("Email cannot be blank.")
+            .email("Must be a valid email."),
+        username: yup.string()
+            .required("Username cannot be blank.")
+            .min(8, "Username must be atleast 8 characters.")
+            .max(30, "Username cannot exceed 30 characters."),
+        password: yup.string()
+            .required("Password cannot be blank.")
+            .min(8, "Password must be astleast 8 characters long.")
+            .max(30, "Password cannot exceed 30 characters."),
+        confirmPassword: yup.string()
+            .required("Confirm Password cannot be blank.")
+            .oneOf([ref("password")], "Passwords does not match"),
     })
     .required()
 
@@ -22,13 +38,17 @@ export default function SignupForm() {
         resolver: yupResolver(schema),
     })
 
+    const [errorOrSuccess, setSuccess] = useState({
+        success: false
+    });
+
     const onSubmit = (data) => {
         let validInput = true;
         if (data.password != data.confirmPassword) {
             validInput = false;
-            alert("Passwords do not match, please correct password.");
         }
         if (validInput == true) {
+            setSuccess({success: true})
             alert(JSON.stringify(data))
         }
     }
@@ -90,6 +110,9 @@ export default function SignupForm() {
                         placeholder="Confirm Password"
                     />
                     <span className="error-msg">{errors.confirmPassword?.message}</span>
+                </div>
+                <div>
+                    <span className="text-success">{errorOrSuccess.success && "Account Successfully Created!"}</span>
                 </div>
                 <div className="signup-footer">
                     <a href="/login" className="login-link">Already a member?</a>

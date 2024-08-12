@@ -6,6 +6,7 @@
     background-color: #ffc0cb;
     width: 100vw;
     height: 100vh;
+    padding: 30px;
     /* Soft pink background */
 }
 
@@ -19,7 +20,7 @@
     position: relative;
     width: 300px;
     text-align: center;
-    
+    margin: 15px;
 }
 
 .signup-title {
@@ -113,4 +114,12 @@
     font-size: small;
     text-align: center;
     margin-top: 0px;
+}
+
+.text-error{
+    color: red;
+}
+
+.text-success{
+    color: green;
 }
