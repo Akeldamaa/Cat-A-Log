@@ -11,7 +11,7 @@ function NftMinting() {
   };
 
   return (
-    <div className="section nft-minting">
+    <div id="nft-section" className="section nft-minting">
       <h2 className="section-title">NFT Minting</h2>
       <div className="nft-minting-options">
         <Button
