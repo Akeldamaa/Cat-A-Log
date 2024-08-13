@@ -8,17 +8,20 @@ function Sidebar() {
         <a href="/" className="nav-link">
           Home
         </a>
-        <a href="/dashboard/upload" className="nav-link">
+        <a href="#upload-section" className="nav-link">
           Upload
         </a>
-        <a href="/dashboard/analysis" className="nav-link">
+        <a href="#analysis-section" className="nav-link">
           Analysis
         </a>
-        <a href="/dashboard/customization" className="nav-link">
+        <a href="#customization-section" className="nav-link">
           Customization
         </a>
-        <a href="/dashboard/nft-minting" className="nav-link">
+        <a href="#nft-section" className="nav-link">
           NFT Minting
+        </a>
+        <a href="/" className="nav-link">
+          Log out
         </a>
       </nav>
       <div className="avatar-container">

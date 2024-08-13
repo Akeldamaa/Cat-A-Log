@@ -58,7 +58,7 @@ function Upload() {
   };
 
   return (
-    <div className="section upload">
+    <div id="upload-section" className="section upload">
       <h2 className="section-title">Image Upload</h2>
       <div
         className="upload-container"

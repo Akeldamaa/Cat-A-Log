@@ -2,7 +2,7 @@ import "./Welcome.css";
 
 function Welcome() {
   return (
-    <div className="section welcome">
+    <div id="welcome-section" className="section welcome">
       <h2 className="section-title">Cat-a-Log </h2>
       <p className="section-description">
         This app allows you to upload images of your cats, analyze their
