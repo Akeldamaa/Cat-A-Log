@@ -8,7 +8,9 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Setup
-- Install [node](https://nodejs.org/en/download/prebuilt-installer). You can skip this step if you already have node installed.
-- Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable). You can skip this step if you already have yarn installed.
+- Install [node](https://nodejs.org/en/download/prebuilt-installer). You can skip this step if you already have node installed
+- Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable). You can skip this step if you already have yarn installed
+- Ensure you are in the frontend directory in your terminal
 - Download all project dependencies using ```yarn```
 - Start the development server using ```yarn dev```
+- You can find an example on how to make API requests to the backend server [here](./src/components/TestApi.jsx). Ensure the backend server is running before making requests and the url matches the one in the backend server

@@ -1,0 +1,39 @@
+@import-normalize;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+.banner {
+    color: #771d4a;
+    padding: 15px;
+    justify-content: center;
+}
+
+.navbar {
+    flex: 1;
+    background-color: #ffc0cb;
+    color: #fff;
+    border-right: 1px solid #ddd;
+    min-width: 200px;
+}
+
+.home-container {
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-section{
+    max-width: 1200px;
+    padding: 20px;
+}

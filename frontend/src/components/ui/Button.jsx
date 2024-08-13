@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from "prop-types";
 
 export function Button({ variant, children, ...props }) {
   const className = `btn ${variant}`;
@@ -8,3 +8,8 @@ export function Button({ variant, children, ...props }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  variant: PropTypes.string,
+  children: PropTypes.node,
+};
