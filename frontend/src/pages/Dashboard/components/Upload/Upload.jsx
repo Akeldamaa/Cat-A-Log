@@ -6,14 +6,12 @@ import "./Upload.css";
 function Upload() {
   const [previewImages, setPreviewImages] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(null);
-  const [showSendOffButton, setShowSendOffButton] = useState(false); 
-  const fileInputRef = useRef(null); 
+  const [showSendOffButton, setShowSendOffButton] = useState(false);
+  const fileInputRef = useRef(null);
 
   const handleImageUpload = async (files) => {
     const fileArray = Array.from(files);
-    const previews = fileArray.map((file) =>
-      URL.createObjectURL(file)
-    );
+    const previews = fileArray.map((file) => URL.createObjectURL(file));
     setPreviewImages(previews);
 
     const formData = new FormData();
@@ -22,7 +20,7 @@ function Upload() {
     });
 
     try {
-      const response = await fetch("http://localhost:8000/api/upload/", {
+      const response = await fetch("http://127.0.0.1:8000/api/upload/", {
         method: "POST",
         body: formData,
       });
@@ -78,7 +76,11 @@ function Upload() {
             ref={fileInputRef} // Attach the ref to the file input
             style={{ display: "none" }} // Hide the input field
           />
-          <Button variant="default" className="upload-button" onClick={handleButtonClick}>
+          <Button
+            variant="default"
+            className="upload-button"
+            onClick={handleButtonClick}
+          >
             Upload
           </Button>
         </div>
@@ -87,13 +89,22 @@ function Upload() {
       {previewImages.length > 0 && (
         <div className="preview-container">
           {previewImages.map((src, index) => (
-            <img key={index} src={src} alt={`Preview ${index}`} className="preview-image" />
+            <img
+              key={index}
+              src={src}
+              alt={`Preview ${index}`}
+              className="preview-image"
+            />
           ))}
         </div>
       )}
 
       {showSendOffButton && (
-        <Button variant="default" onClick={handleSendOff} className="send-off-button">
+        <Button
+          variant="default"
+          onClick={handleSendOff}
+          className="send-off-button"
+        >
           Send off
         </Button>
       )}
