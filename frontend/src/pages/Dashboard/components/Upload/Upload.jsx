@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Button } from "../../../../components/ui/Button";
 import { UploadIcon } from "../../../../components/ui/icons";
 import "./Upload.css";
+import DataInputForm from "../DataInputForm/DataInputForm";
 
 function Upload() {
   const [previewImages, setPreviewImages] = useState([]);
