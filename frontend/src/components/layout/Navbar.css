@@ -1,23 +1,19 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #ffc0cb;
+.top-nav .nav-items {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ffc0cb;
 }
 
-li {
-    float: left;
+.top-nav .nav-items li {
+  float: left;
 }
 
-li a {
-    display: block;
-    color: rgb(61, 13, 144);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.nav-link {
-    color: black;
+.top-nav .nav-items .nav-link {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: black;
 }
