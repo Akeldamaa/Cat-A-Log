@@ -1,0 +1,44 @@
+.sidebar {
+    background-color: #95b3ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar .menu-item {
+    font-size: 18px;
+    padding-top: 15px;
+}
+
+.toggle-button {
+    background-color: #81c489;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-color: none;
+    border-color: #81c489;
+    width: 100%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: whites;
+}
+
+/* Avatar */
+.avatar-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

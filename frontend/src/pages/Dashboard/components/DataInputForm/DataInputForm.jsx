@@ -11,7 +11,7 @@ function DataInputForm() {
   });
 
   return (
-    <div className="section data-input">
+    <div id="data-input-section" className="section data-input">
       <h2 className="section-title">Data Input</h2>
       <form className="data-input-form">
         <div className="form-group">

@@ -15,7 +15,7 @@ function Analysis() {
   const [pastCreations, setPastCreations] = useState([]);
 
   return (
-    <div className="section analysis">
+    <div id="analysis-section" className="section analysis">
       <h2 className="section-title">AI Analysis</h2>
       <div className="analysis-container">
         {uploadedImages.length > 0 ? (

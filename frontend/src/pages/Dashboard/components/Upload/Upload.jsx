@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Button } from "../../../../components/ui/Button";
 import { UploadIcon } from "../../../../components/ui/icons";
 import "./Upload.css";
+import DataInputForm from "../DataInputForm/DataInputForm";
 
 function Upload() {
   const [previewImages, setPreviewImages] = useState([]);
@@ -58,7 +59,7 @@ function Upload() {
   };
 
   return (
-    <div className="section upload">
+    <div id="upload-section" className="section upload">
       <h2 className="section-title">Image Upload</h2>
       <div
         className="upload-container"
