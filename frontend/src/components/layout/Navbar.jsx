@@ -1,38 +1,39 @@
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar() {
   return (
-    <nav className="nav">
-      <ul>
+    <nav className="top-nav">
+      <ul className="nav-items">
         <li>
-          <a href="/" className="nav-link">
+          <Link to="/" className="nav-link">
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/login" className="nav-link">
+          <Link to="/login" className="nav-link">
             Login
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/signup" className="nav-link">
+          <Link to="/signup" className="nav-link">
             Sign Up
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/dashboard" className="nav-link">
-            Dashboard {/*Eventually only Accessible through the log in and sign up pages*/}
-          </a>
+          <Link to="/dashboard" className="nav-link">
+            Dashboard {/*Eventually only Accessible when you are logged in*/}
+          </Link>
         </li>
         <li>
-          <a href="/about" className="nav-link">
+          <Link to="/about" className="nav-link">
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/featured-shelter" className="nav-link">
+          <Link to="/featured-shelter" className="nav-link">
             Featured Shelter
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
