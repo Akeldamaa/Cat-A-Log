@@ -140,6 +140,10 @@
   font-size: small;
 }
 
+.login-container .error-or-success {
+  margin-bottom: 20px;
+}
+
 .login-container .text-success {
   color: green;
 }

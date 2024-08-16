@@ -3,6 +3,8 @@ import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
+import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -12,6 +14,8 @@ const schema = yup
   .required();
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -23,20 +27,47 @@ export default function LoginForm() {
   const [errorOrSuccess, setSuccess] = useState({
     success: false,
     error: false,
+    errorMessage: "",
     neutral: false,
   });
 
   const onSubmit = (data) => {
-    let validInput = true;
-    //Validate if login information is valid
-    if (validInput == true) {
-      setSuccess({ success: true, error: false, neutral: false });
-      alert(JSON.stringify(data));
-      //Redirect to user dashboard
-    }
-    if (validInput == false) {
-      setSuccess({ success: false, error: true, neutral: false });
-    }
+    //Send login information to backend
+    axios
+      .post("/api/auth/login/", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((response) => {
+        // console.log(response);
+        localStorage.setItem("accessToken", response.data.tokens.access);
+        localStorage.setItem("refreshToken", response.data.tokens.refresh);
+        setSuccess({
+          success: true,
+          neutral: false,
+          errorMessage: "",
+          error: false,
+        });
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        // console.log(error);
+        if (error.response.data?.detail === "Email or password is incorrect.") {
+          setSuccess({
+            success: false,
+            error: true,
+            errorMessage: "Invalid login information",
+            neutral: false,
+          });
+        } else {
+          setSuccess({
+            success: false,
+            error: true,
+            errorMessage: "An error occurred. Please try again later.",
+            neutral: false,
+          });
+        }
+      });
   };
 
   return (
@@ -64,17 +95,20 @@ export default function LoginForm() {
             id="password"
             className="login-input"
             placeholder="Password"
+            type="password"
           />
           <span className="error-msg">{errors.password?.message}</span>
         </div>
 
-        <div>
+        <div className="error-or-success">
           <span className="text-neutral">{errorOrSuccess.neutral && ""}</span>
           <span className="text-success">
             {errorOrSuccess.success && "Successfully Logged in!"}
           </span>
           <span className="text-error">
-            {errorOrSuccess.error && "Invalid login information"}
+            {errorOrSuccess.error &&
+              (errorOrSuccess.errorMessage ||
+                "An error occurred. Please try again later.")}
           </span>
         </div>
 
