@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./Avatar.css";
 
 export function Avatar({ children }) {
   return <div className="avatar">{children}</div>;
@@ -9,7 +10,7 @@ Avatar.propTypes = {
 };
 
 export function AvatarImage({ src }) {
-  return <img className="avatar-img" src={src} alt="Avatar" />;
+  return <img className="avatar-image" src={src} alt="Avatar" />;
 }
 
 AvatarImage.propTypes = {
