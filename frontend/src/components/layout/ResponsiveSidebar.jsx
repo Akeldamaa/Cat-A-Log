@@ -12,11 +12,18 @@ import {
   Fullscreen,
   FullscreenExit,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { ToggleButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function ResponsiveSidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    navigate("/");
+  };
 
   return (
     <Sidebar className="sidebar" collapsed={collapsed}>
@@ -38,32 +45,42 @@ function ResponsiveSidebar() {
             <AvatarImage src="/display-picture.png" />
           </Avatar>
         </MenuItem>
-        <Link class="nav-link" to="/">
-          <MenuItem className="menu-item" icon={<Home />}>
-            Home
-          </MenuItem>
-        </Link>
-        <Link class="nav-link" to="#upload-section">
-          <MenuItem className="menu-item" icon={<FileUpload />}>
-            Upload
-          </MenuItem>
-        </Link>
-        <Link class="nav-link" to="#analysis-section">
-          <MenuItem className="menu-item" icon={<ImageSearch />}>
-            Analysis
-          </MenuItem>
-        </Link>
-        <Link class="nav-link" to="#customization-section">
-          <MenuItem className="menu-item" icon={<Brush />}>
-            Customization
-          </MenuItem>
-        </Link>
-        <Link class="nav-link" to="#nft-section">
-          <MenuItem className="menu-item" icon={<CurrencyExchange />}>
-            NFT Minting
-          </MenuItem>
-        </Link>
-        <MenuItem className="menu-item" icon={<Logout />}>
+        <MenuItem className="menu-item" icon={<Home />} href="/">
+          Home
+        </MenuItem>
+        <MenuItem
+          className="menu-item"
+          icon={<FileUpload />}
+          href="#upload-section"
+        >
+          Upload
+        </MenuItem>
+        <MenuItem
+          className="menu-item"
+          icon={<ImageSearch />}
+          href="#analysis-section"
+        >
+          Analysis
+        </MenuItem>
+        <MenuItem
+          className="menu-item"
+          icon={<Brush />}
+          href="#customization-section"
+        >
+          Customization
+        </MenuItem>
+        <MenuItem
+          className="menu-item"
+          icon={<CurrencyExchange />}
+          href="#nft-section"
+        >
+          NFT Minting
+        </MenuItem>
+        <MenuItem
+          className="menu-item"
+          icon={<Logout />}
+          onClick={handleLogout}
+        >
           Log out
         </MenuItem>
       </Menu>

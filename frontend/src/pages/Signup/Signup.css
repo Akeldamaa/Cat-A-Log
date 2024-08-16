@@ -127,6 +127,10 @@
   font-size: small;
 }
 
+.signup-container .error-or-success {
+  margin-bottom: 20px;
+}
+
 .signup-container .text-error {
   color: red;
 }

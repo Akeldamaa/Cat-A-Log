@@ -4,7 +4,8 @@ import "./Signup.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ref } from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../../api/axios";
 
 const schema = yup
   .object({
@@ -37,6 +38,8 @@ const schema = yup
   .required();
 
 export default function SignupForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -47,17 +50,53 @@ export default function SignupForm() {
 
   const [errorOrSuccess, setSuccess] = useState({
     success: false,
+    error: false,
+    errorMessage: "",
+    neutral: false,
   });
 
   const onSubmit = (data) => {
-    let validInput = true;
-    if (data.password != data.confirmPassword) {
-      validInput = false;
-    }
-    if (validInput == true) {
-      setSuccess({ success: true });
-      alert(JSON.stringify(data));
-    }
+    console.log(data);
+
+    axios
+      .post("/api/auth/register/", {
+        email: data.email,
+        password: data.password,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      })
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("accessToken", response.data.tokens.access);
+        localStorage.setItem("refreshToken", response.data.tokens.refresh);
+        setSuccess({
+          success: true,
+          neutral: false,
+          errorMessage: "",
+          error: false,
+        });
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (
+          error.response.data?.detail === "User with this email already exists"
+        ) {
+          setSuccess({
+            success: false,
+            error: true,
+            errorMessage: "User with this email already exists",
+            neutral: false,
+          });
+        } else {
+          setSuccess({
+            success: false,
+            error: true,
+            errorMessage: "An error occurred. Please try again later.",
+            neutral: false,
+          });
+        }
+      });
   };
 
   return (
@@ -77,16 +116,16 @@ export default function SignupForm() {
         </div>
 
         <div className="signup-blocks">
-          <label htmlFor="last" className="signup-label">
+          <label htmlFor="lastName" className="signup-label">
             Last Name
           </label>
           <input
-            {...register("last")}
-            id="last"
+            {...register("lastName")}
+            id="lastName"
             className="signup-input"
             placeholder="Last Name"
           />
-          <span className="error-msg">{errors.firstName?.message}</span>
+          <span className="error-msg">{errors.lastName?.message}</span>
         </div>
 
         <div className="signup-blocks">
@@ -130,9 +169,15 @@ export default function SignupForm() {
           <span className="error-msg">{errors.confirmPassword?.message}</span>
         </div>
 
-        <div>
+        <div className="error-or-success">
+          <span className="text-neutral">{errorOrSuccess.neutral && ""}</span>
           <span className="text-success">
             {errorOrSuccess.success && "Account Successfully Created!"}
+          </span>
+          <span className="text-error">
+            {errorOrSuccess.error &&
+              (errorOrSuccess.errorMessage ||
+                "An error occurred. Please try again later.")}
           </span>
         </div>
 
