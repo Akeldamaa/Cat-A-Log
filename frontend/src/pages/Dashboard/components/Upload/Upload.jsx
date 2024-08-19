@@ -2,12 +2,12 @@ import { useState, useRef } from "react";
 import { Button } from "../../../../components/ui/Button";
 import { UploadIcon } from "../../../../components/ui/icons";
 import "./Upload.css";
-import DataInputForm from "../DataInputForm/DataInputForm";
 
 function Upload() {
   const [previewImages, setPreviewImages] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(null);
   const [showSendOffButton, setShowSendOffButton] = useState(false);
+  const [generatedCards, setGeneratedCards] = useState([]);
   const fileInputRef = useRef(null);
 
   const handleImageUpload = async (files) => {
@@ -26,8 +26,10 @@ function Upload() {
         body: formData,
       });
 
-      if (response.ok) {
-        setShowSendOffButton(true); // Show "Send off" button after successful upload
+      const result = await response.json();
+      if (result.status === "success") {
+        setGeneratedCards(result.cards);
+        setShowSendOffButton(true);
       } else {
         setUploadStatus("Upload failed. Please try again.");
       }
@@ -111,6 +113,19 @@ function Upload() {
       )}
 
       {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
+
+      {/* Render the generated trading cards */}
+      {generatedCards && generatedCards.length > 0 && (
+        <div className="generated-cards">
+          {generatedCards.map((card, index) => (
+            <div key={index} className="card">
+              <img src={card.trading_card} alt={`Generated Card ${index}`} />
+              <p>Species: {card.species}</p>
+              <p>Description: {card.analysis}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
