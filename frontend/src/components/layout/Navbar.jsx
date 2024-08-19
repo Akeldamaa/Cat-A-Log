@@ -26,11 +26,6 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/about" className="nav-link">
-            About
-          </Link>
-        </li>
-        <li>
           <Link to="/featured-shelter" className="nav-link">
             Featured Shelter
           </Link>
