@@ -13,7 +13,7 @@ const DashBoard = () => {
     <div className="dashboard-container">
       <ResponsiveSidebar />
       <div className="content">
-        <TestApi />
+        {/* <TestApi /> */}
         <Welcome />
         <Upload />
         <DataInputForm />
