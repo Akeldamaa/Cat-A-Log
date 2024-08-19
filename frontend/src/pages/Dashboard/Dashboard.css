@@ -1,8 +1,15 @@
+/* 
+Color Pallete Reference Guide:
+Blue: #95b3ff
+Pink: #ffc0cb
+Green: #81c489
+*/
+
 /* Layout */
 .dashboard-container {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   width: 100%;
   background-color: #95b3ff;
   border-radius: 8px;
