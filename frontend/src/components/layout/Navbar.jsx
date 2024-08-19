@@ -22,7 +22,7 @@ export default function Navbar() {
         </li>
         <li>
           <Link to="/dashboard" className="nav-link">
-            Dashboard {/*Eventually only Accessible when you are logged in*/}
+            Dashboard
           </Link>
         </li>
         <li>
