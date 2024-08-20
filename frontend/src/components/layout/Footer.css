@@ -20,3 +20,7 @@ footer img {
     margin: 10px;
     max-height: 125px;
 }
+
+footer a:hover {
+    text-decoration: underline;
+}
