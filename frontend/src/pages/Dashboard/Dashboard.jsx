@@ -16,7 +16,7 @@ const DashBoard = () => {
         {/* <TestApi /> */}
         <Welcome />
         <Upload />
-        <DataInputForm />
+        {/* <DataInputForm /> */}
         <Analysis />
         <Customization />
         <NftMinting />

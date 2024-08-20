@@ -94,6 +94,7 @@ Green: #81c489
   justify-content: space-between;
   font-size: 12px;
   margin-bottom: 30px;
+  font-family: Poppins;
 }
 
 .login-container .forgot-password,
@@ -157,4 +158,12 @@ Green: #81c489
 
 .login-container .text-error {
   color: red;
+}
+
+.login-card .login-logo {
+  max-height: 75px;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  display: block;
 }

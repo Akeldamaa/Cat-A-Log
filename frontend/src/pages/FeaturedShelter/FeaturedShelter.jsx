@@ -1,18 +1,14 @@
 import Navbar from "../../components/layout/Navbar";
 import "./FeaturedShelter.css";
-import DonateToday from './donate-today.jpg'
+import DonateToday from '../Assets/donate-today.jpg'
+import Footer from "../../components/layout/Footer";
+import Banner from "../../components/layout/Header";
 
 export default function FeaturedShelter() {
   return (
     <div className="home-wrapper">
       <div className="home-container">
-        <div className="banner">
-          <h1>Cat-A-Log</h1>
-        </div>
-        <div className="navbar">
-          <Navbar />
-        </div>
-        
+        <Banner />
         <div className="featured-section">
           <div className="why-donate">
             <img
@@ -45,7 +41,7 @@ export default function FeaturedShelter() {
             </h2>
           </div>
         </div>
-
+        <Footer />
       </div>
     </div>
   );
