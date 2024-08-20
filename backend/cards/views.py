@@ -1,28 +1,25 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.http import HttpResponse, JsonResponse
-from .models import CatImage
-from .serializers import CatImageSerializer
-from rest_framework import status
+from django.http import JsonResponse
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser
+import os
 
 
-# Create your views here.
-@api_view(['GET'])
-def index(request):
-    return Response({'msg': 'Welcome to the Cards API!'})
+from django.urls import path
+from . import views
 
-# def upload_image(request):
-#     if request.method == 'POST':
-#         image = request.FILES.get('file')
-#         cat_image = CatImage.objects.create(image=image)
-#         return JsonResponse({'message': 'File uploaded successfully', 'file': cat_image.image.url})
-#     return JsonResponse({'error': 'Invalid request'}, status=400)
+
 
 @api_view(['POST'])
-def upload_image(request):
+@parser_classes([MultiPartParser])
+def upload_images(request):
     if request.method == 'POST':
-        image = request.FILES.get('file')
-        serializer = CatImageSerializer(image=image)
-        return Response({'message': 'File uploaded successfully', 'file': serializer.data}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        images = request.FILES.getlist('images')
+        for image in images:
+            
+            file_path = f'media/uploads/{image.name}'
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            with open(file_path, 'wb+') as destination:
+                for chunk in image.chunks():
+                    destination.write(chunk)
+        return JsonResponse({'status': 'success', 'message': 'Images uploaded successfully.'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
