@@ -1,0 +1,21 @@
+XHRPOST
+http://127.0.0.1:8000/api/upload/
+[HTTP/1.1 500 Internal Server Error 61ms]
+
+	
+POST
+	http://127.0.0.1:8000/api/upload/
+Status
+500
+Internal Server Error
+VersionHTTP/1.1
+Transferred101.08 kB (100.66 kB size)
+Referrer Policystrict-origin-when-cross-origin
+DNS ResolutionSystem
+
+Error uploading files: SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data dashboard:13851:25
+    overrideMethod dashboard:13851
+    handleImageUpload Upload.jsx:43
+    onChange Upload.jsx:86
+    React 23
+    <anonymous> main.jsx:9
