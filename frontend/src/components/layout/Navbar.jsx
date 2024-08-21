@@ -1,41 +1,38 @@
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import Logo from "../../pages/Assets/CatALogLogo.png"
 
 export default function Navbar() {
   return (
-    <nav className="top-nav">
-      <ul className="nav-items">
-        <li>
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-        </li>
-        <li>
-          <Link to="/signup" className="nav-link">
-            Sign Up
-          </Link>
-        </li>
-        <li>
-          <Link to="/dashboard" className="nav-link">
-            Dashboard {/*Eventually only Accessible when you are logged in*/}
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" className="nav-link">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/featured-shelter" className="nav-link">
-            Featured Shelter
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <div>
+      <nav className="top-nav">
+        <ul className="nav-items">
+          <li>
+            <img
+              className="logo"
+              src={Logo}
+            />
+          </li>
+          <li>
+            <NavLink activeClassName="active" className="nav-link" to="/featured-shelter">Featured Shelter</NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active" className="nav-link" to="/dashboard">Dashboard</NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active" className="nav-link" to="/signup">Sign up</NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active" className="nav-link" to="/login">Login </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active" className="nav-link" to="/">Home </NavLink>
+          </li>
+          
+        </ul>
+      </nav>
+    </div>
+
   );
 }

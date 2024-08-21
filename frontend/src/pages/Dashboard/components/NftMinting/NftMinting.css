@@ -1,3 +1,10 @@
+/* 
+Color Pallete Reference Guide:
+Blue: #95b3ff
+Pink: #ffc0cb
+Green: #81c489
+*/
+
 /* NFT Minting Section */
 .nft-minting-options {
   display: flex;
@@ -10,7 +17,8 @@
   margin-right: 5px;
 }
 
-.active {
+.nft-minting .active {
   background-color: #c94888;
   color: #fff;
 }
+

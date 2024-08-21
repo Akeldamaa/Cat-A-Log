@@ -1,0 +1,26 @@
+.footerContent {
+    text-align: center;
+}
+
+.footerContent a {
+    text-decoration: none;
+    color: black;
+}
+
+.logoContainer {
+    text-align: center;
+}
+
+footer {
+    background-color: #ffc0cb;
+    padding: 15px;
+}
+
+footer img {
+    margin: 10px;
+    max-height: 125px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
