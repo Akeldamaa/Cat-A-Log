@@ -11,6 +11,7 @@ import requests
 import replicate
 import openai
 import logging
+from backend.settings import MEDIA_ROOT
 
 # Setup logger
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ REPLICATE_API_KEY = ""
 OPENAI_API_KEY = " "
 
 # Media root directory
-MEDIA_ROOT = 'Cat-A-Log/media'
+# MEDIA_ROOT = 'Cat-A-Log/media'
 
 # Paths to your templates
 TEMPLATES = {

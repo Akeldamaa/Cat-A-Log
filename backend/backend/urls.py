@@ -41,7 +41,11 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+<<<<<<< HEAD
     path('api/upload/', views.upload_images, name='upload_images'),
+=======
+    #  path('api/upload/', views.upload_images, name='upload_images'),
+>>>>>>> 507738a3f09ee3655287e2629824cda9dee4cf47
     path('api/cards/', include('cards.urls')), 
     path('api/auth/', include('users.urls')),
     # JWT token URLs 
