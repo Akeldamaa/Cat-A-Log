@@ -31,7 +31,7 @@ REPLICATE_API_URL = "https://api.replicate.com/v1/predictions"
 MODEL_VERSION = "4acb778eb059772225ec213948f0660867b2e03f277448f18cf1800b96a65a1a"
 
 # Media root directory
-MEDIA_ROOT = '/home/jthinkpad/Documents/GitHub/Cat-A-Log/backend/media'
+MEDIA_ROOT = 'Cat-A-Log/media'
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
