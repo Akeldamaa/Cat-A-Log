@@ -1,42 +1,53 @@
 import { useState, useRef } from "react";
 import { Button } from "../../../../components/ui/Button";
 import { UploadIcon } from "../../../../components/ui/icons";
+import ProgressBar from "../../../../components/ProgressBar";
 import "./Upload.css";
-import DataInputForm from "../DataInputForm/DataInputForm";
 
-function Upload() {
+function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
   const [previewImages, setPreviewImages] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(null);
   const [showSendOffButton, setShowSendOffButton] = useState(false);
+  const [loading, setLoading] = useState(false); // State to track loading
   const fileInputRef = useRef(null);
 
   const handleImageUpload = async (files) => {
-    const fileArray = Array.from(files);
-    const previews = fileArray.map((file) => URL.createObjectURL(file));
-    setPreviewImages(previews);
-
+    setLoading(true);
+    setUploadStatus(null);
+    setShowSendOffButton(false);
+    setPreviewImages([]);
+  
     const formData = new FormData();
-    fileArray.forEach((file) => {
+    Array.from(files).forEach((file) => {
       formData.append("images", file);
     });
-
+  
     try {
       const response = await fetch("http://127.0.0.1:8000/api/upload/", {
         method: "POST",
         body: formData,
       });
-
-      if (response.ok) {
-        setShowSendOffButton(true); // Show "Send off" button after successful upload
+  
+      const result = await response.json();
+      console.log("Full API Response:", result);  // Log full API response for debugging
+  
+      if (response.ok && result.status === "success" && result.cards) {
+        onCardsGenerated(result.cards);
+        setPreviewImages(files.map((file) => URL.createObjectURL(file)));
+        setUploadStatus("Upload successful!");
+        setShowSendOffButton(true);
       } else {
         setUploadStatus("Upload failed. Please try again.");
       }
     } catch (error) {
       console.error("Error uploading files:", error);
       setUploadStatus("Upload failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
-
+  
+  
   const handleSendOff = () => {
     setUploadStatus("Upload successful!"); // Show success message when "Send off" button is clicked
     setShowSendOffButton(false); // Hide the "Send off" button after it's clicked
@@ -52,7 +63,6 @@ function Upload() {
   };
 
   const handleButtonClick = () => {
-    // Programmatically trigger the file input click
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -86,6 +96,8 @@ function Upload() {
           </Button>
         </div>
       </div>
+
+      {loading && <ProgressBar />} {/* Display progress bar during loading */}
 
       {previewImages.length > 0 && (
         <div className="preview-container">
