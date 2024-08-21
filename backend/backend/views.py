@@ -33,3 +33,10 @@ def upload_images(request):
     
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
 '''
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def index(request):
+    return Response({'msg': 'Welcome to the Cat-A-Log API!'})
