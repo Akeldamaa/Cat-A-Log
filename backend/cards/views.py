@@ -4,6 +4,7 @@ from rest_framework.parsers import MultiPartParser
 import os
 import io
 import cv2
+import base64
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import requests
@@ -146,9 +147,29 @@ def upload_images(request):
                 img_byte_arr = io.BytesIO()
                 grabcut_pil_img.save(img_byte_arr, format='PNG')
                 img_byte_arr = img_byte_arr.getvalue()
+<<<<<<< HEAD
 
                 # # Encode the image bytes to base64
                 # img_base64 = base64.b64encode(img_byte_arr).decode('utf-8')
+=======
+                # Encode the image bytes to base64
+                
+                img_base64 = base64.b64encode(img_byte_arr).decode('utf-8')
+                # Call Replicate API for sticker generation
+                headers = {
+                    "Authorization": f"Token {REPLICATE_API_KEY}",
+                    "Content-Type": "application/json",
+                }
+
+                
+                data = {
+                    "version": MODEL_VERSION,
+                    "input": {
+                        "image": img_byte_arr
+                    }
+                }
+                response = requests.post(REPLICATE_API_URL, headers=headers, json=data)
+>>>>>>> cd2dde8 ( Imported base64 in use for  encoding images)
 
                 # # Call Replicate API for sticker generation
                 # headers = {
