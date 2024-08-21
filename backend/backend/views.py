@@ -1,3 +1,6 @@
+'''
+
+
 from rest_framework.response import Response
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -29,3 +32,4 @@ def upload_images(request):
         return JsonResponse({'status': 'success', 'message': 'Images uploaded successfully.'})
     
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+'''
