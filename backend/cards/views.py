@@ -18,20 +18,20 @@ logger = logging.getLogger(__name__)
 REPLICATE_API_KEY = ""
 OPENAI_API_KEY = " "
 
+# Media root directory
+MEDIA_ROOT = 'Cat-A-Log/media'
+
 # Paths to your templates
 TEMPLATES = {
-    "common": os.path.join(os.getenv('MEDIA_ROOT', 'backend/media'), 'uploads/templates/Green_2.png'),
-    "uncommon": os.path.join(os.getenv('MEDIA_ROOT', 'backend/media'), 'uploads/templates/blue_2.png'),
-    "rare": os.path.join(os.getenv('MEDIA_ROOT', 'backend/media'), 'uploads/templates/purple_2.png'),
-    "legendary": os.path.join(os.getenv('MEDIA_ROOT', 'backend/media'), 'uploads/templates/orange_2.png')
+    "common": os.path.join(MEDIA_ROOT, 'Green_2.png'),
+    "uncommon": os.path.join(MEDIA_ROOT, 'Blue_2.png'),
+    "rare": os.path.join(MEDIA_ROOT, 'purple_2.png'),
+    "legendary": os.path.join(MEDIA_ROOT, 'orange_2.png')
 }
 
 # Replicate API URL and the specific model version we want to use
 REPLICATE_API_URL = "https://api.replicate.com/v1/predictions"
 MODEL_VERSION = "4acb778eb059772225ec213948f0660867b2e03f277448f18cf1800b96a65a1a"
-
-# Media root directory
-MEDIA_ROOT = '/home/jthinkpad/Documents/GitHub/Cat-A-Log/backend/media'
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
