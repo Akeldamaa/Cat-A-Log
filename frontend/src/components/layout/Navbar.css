@@ -8,13 +8,13 @@ Green: #81c489
 .top-nav .nav-items {
   list-style-type: none;
   margin: 0;
-  padding: 0;
   overflow: hidden;
   background-color: #ffc0cb;
+  flex-wrap: wrap;
 }
 
-.top-nav .nav-items li {
-  float: left;
+.top-nav .nav-link {
+  float: right;
 }
 
 .top-nav .nav-items .nav-link {
@@ -23,4 +23,28 @@ Green: #81c489
   padding: 14px 16px;
   text-decoration: none;
   color: black;
+  align-items: center;
+  display: block;
+  margin-top: 5px;
 }
+
+.logo {
+  float: left;
+  filter: drop-shadow(rgba(0, 0, 0, 0.215) 1px 1px 2px);
+  max-height: 50px;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+li a:hover {
+  background-color: #81c489;
+  box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,1);
+}
+
+li .active{
+  background: #ff9eae;
+    box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,1);
+}
+

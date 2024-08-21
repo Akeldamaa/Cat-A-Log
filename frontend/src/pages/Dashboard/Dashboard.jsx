@@ -23,7 +23,7 @@ const DashBoard = () => {
         <Welcome />
       
         <Upload onCardsGenerated={handleCardsGenerated} />
-        <DataInputForm />
+        {/* <DataInputForm /> */}
         
         <Analysis cardsData={cardsData} />
         <Customization />

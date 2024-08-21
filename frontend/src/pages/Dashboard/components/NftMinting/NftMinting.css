@@ -17,7 +17,8 @@ Green: #81c489
   margin-right: 5px;
 }
 
-.active {
+.nft-minting .active {
   background-color: #c94888;
   color: #fff;
 }
+

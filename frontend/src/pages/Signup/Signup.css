@@ -129,6 +129,19 @@ Green: #81c489
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
+.signup-footer{
+  font-family: Poppins;
+}
+
+.signup-footer a{
+  color:#333;
+}
+
+.signup-footer a:hover{
+  color:#333;
+  text-decoration: underline;
+}
+
 .signup-container .error-msg {
   color: red;
   font-size: small;
@@ -144,4 +157,12 @@ Green: #81c489
 
 .signup-container .text-success {
   color: green;
+}
+
+.signup-card .login-logo {
+  max-height: 75px;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
