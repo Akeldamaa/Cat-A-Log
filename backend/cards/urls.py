@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("media/upload/", views.upload_images, name="index"),
+      path('upload/', views.upload_images, name='upload_images'),
+  
     
 ]
