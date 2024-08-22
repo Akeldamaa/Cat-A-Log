@@ -5,9 +5,13 @@ Pink: #ffc0cb
 Green: #81c489
 */
 
+/* .top-nav {
+  /* padding: 5px; 
+} */
+ 
 .top-nav .nav-items {
   list-style-type: none;
-  margin: 0;
+  /* margin: 0; */
   overflow: hidden;
   background-color: #ffc0cb;
   flex-wrap: wrap;
@@ -25,16 +29,17 @@ Green: #81c489
   color: black;
   align-items: center;
   display: block;
-  margin-top: 5px;
+  height: 60px;
 }
 
 .logo {
   float: left;
   filter: drop-shadow(rgba(0, 0, 0, 0.215) 1px 1px 2px);
   max-height: 50px;
-  margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
+  margin-left: 20px;
+  
 }
 
 

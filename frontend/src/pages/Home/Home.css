@@ -42,6 +42,13 @@ Green: #81c489
   padding: 20px;
 }
 
+p ol {
+  padding: 20px;
+}
+
+p ul{
+  padding: 20px;
+}
 
 
 .home-wrapper p{
@@ -50,6 +57,73 @@ Green: #81c489
 
 .logoContainer {
   text-align: center;
+}
+
+.home-section h2 {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.about-us h2 {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+.features-section .column {
+  flex: 50%;
+  background-color: rgb(238, 238, 238);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section .column {
+  flex: 50%;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.features-title {
+  text-align: center;
+}
+.welcome-section img {
+  width: 100%;
+  float: right;
+  border-radius: 10px;
+  margin: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mission-statement {
+  margin: 15px;
+}
+
+.about-us {
+  margin: 15px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
 }
 
 
