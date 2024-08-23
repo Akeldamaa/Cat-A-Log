@@ -21,10 +21,10 @@ const DashBoard = () => {
       <ResponsiveSidebar />
       <div className="content">
         <Welcome />
-      
+
         <Upload onCardsGenerated={handleCardsGenerated} />
         {/* <DataInputForm /> */}
-        
+
         <Analysis cardsData={cardsData} />
         <Customization />
         <NftMinting />

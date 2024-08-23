@@ -50,10 +50,10 @@ client = OpenAI(
 replicate_api_key = ""
 
 # Path to your image
-image_path = "./bengal.jpg"
+# image_path = "./bengal.jpg"
 
 # Getting the base64 string
-base64_image = encode_image(image_path)
+# base64_image = encode_image(image_path)
 
 # Messages payload for the OpenAI API request
 messages = [

@@ -12,31 +12,37 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 
 from pathlib import Path
-from datetime import timedelta 
-import os
+from datetime import timedelta
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'backend/media/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-077(kte%zl$*ks@8h0-jqxn%mvsfr1%35t!_5quwlv)1fxw9+p'
+SECRET_KEY = config(
+    "DJANGO_SECRET_KEY",
+    cast=str,
+    default='django-insecure-077(kte%zl$*ks@8h0-jqxn%mvsfr1%35t!_5quwlv)1fxw9+p'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', '.catalog-trading.fun']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Vite Development Server
-    'http://localhost:3000',  # Create-React-App Dev Server
+    'http://localhost:3000',  # Docker Dev Frontend Server
+    'http://localhost:8000',  # Docker Dev Backend Server
     'http://127.0.0.1:8000',  # Django Dev Server
-    
+    'https://catalog-trading.fun',  # Production Frontend Server
+    'https://api.catalog-trading.fun',  # Production Backend Server
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -96,14 +102,20 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# Using PostgreSQL as the database
+
+POSTGRES_NAME = config('POSTGRES_NAME', cast=str)
+POSTGRES_USER = config('POSTGRES_USER', cast=str)
+POSTGRES_PASSWORD = config('POSTGRES_PASSWORD', cast=str)
+POSTGRES_HOST = config('POSTGRES_HOST', cast=str)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Cat-A-Log',
-        'USER': 'purrgrammers',
-        'PASSWORD': 'cat',
-        'HOST': 'localhost',  # Or the address of your PostgreSQL server
+        'NAME': POSTGRES_NAME,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,  # Or the address of your PostgreSQL server
         'PORT': '5432',       # Default port for PostgreSQL
     }
 }
