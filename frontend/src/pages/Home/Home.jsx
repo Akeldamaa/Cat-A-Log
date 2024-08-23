@@ -1,24 +1,24 @@
-import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer"
 import "./Home.css";
+import Banner from "../../components/layout/Header";
+import WelcomeSection from "./components/WelcomeSection";
+import FeaturesSection from "./components/FeaturesSection";
+import MissionSection from "./components/MissionSection";
+import AboutUsSection from "./components/AboutUsSection";
 
 export default function Home() {
   return (
-    <div className="home-container">
-      <div className="banner">
-        <h1>Cat-A-Log</h1>
+    <div className="home-wrapper">
+      <div className="home-container">
+        <Banner />
+        <div className="home-section">
+          <WelcomeSection/>
+          <MissionSection />
+          <FeaturesSection />
+          <AboutUsSection />
+        </div>
+        <Footer />
       </div>
-      <div className="navbar">
-        <Navbar />
-      </div>
-      <div className="home-section">
-        <h2>Welcome!</h2>
-        <p>
-          This app allows you to upload images of your cats, analyze their
-          features using AI, customize them with stickers and elements, and even
-          mint them as NFTs on the blockchain. Explore our page, or create an
-          account to start!
-        </p>
-      </div>
-    </div>
+    </div >
   );
 }

@@ -19,7 +19,7 @@ function Customization() {
   };
 
   return (
-    <div className="section customization">
+    <div id="customization-section" className="section customization">
       <h2 className="section-title">Customization</h2>
       <div className="customization-options">
         <div className="customization-group">

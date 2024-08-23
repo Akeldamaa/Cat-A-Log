@@ -20,7 +20,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'backend/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -32,12 +32,12 @@ SECRET_KEY = 'django-insecure-077(kte%zl$*ks@8h0-jqxn%mvsfr1%35t!_5quwlv)1fxw9+p
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:8000",
+    'http://localhost:5173',  # Vite Development Server
+    'http://localhost:3000',  # Create-React-App Dev Server
+    'http://127.0.0.1:8000',  # Django Dev Server
+    
 ]
-
 CORS_ALLOW_CREDENTIALS = True
 
 
@@ -55,11 +55,14 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'cards',
-    'users'
+    'users',
+    
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -170,6 +173,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
