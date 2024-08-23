@@ -1,14 +1,14 @@
 import "./Footer.css";
-import PurgrammersLogo from "../../pages/Assets/PurrgrammersLogo.png";
+import PurrgrammersLogo from "../../pages/Assets/PurrgrammersLogo.png";
 
 export default function Footer() {
   return (
     <footer className="footerContainer">
       <div className="logoContainer">
-        <img src={PurgrammersLogo} alt="The Purgrammers Logo" />
+        <img src={PurrgrammersLogo} alt="The Purrgrammers Logo" />
       </div>
       <div className="footerContent">
-        <h4>The Purrgrammers&copy;</h4>
+        <h4>The Purrgrammers &copy;</h4>
         <p>
           <a href="https://linktr.ee/thePurrgrammers" target="_blank">
             Visit our Linktree

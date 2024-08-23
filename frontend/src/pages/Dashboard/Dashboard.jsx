@@ -5,7 +5,7 @@ import Upload from "./components/Upload/Upload";
 import Analysis from "./components/Analysis/Analysis";
 import Customization from "./components/Customization/Customization";
 import NftMinting from "./components/NftMinting/NftMinting";
-import DataInputForm from "./components/DataInputForm/DataInputForm";
+// import DataInputForm from "./components/DataInputForm/DataInputForm";
 import ResponsiveSidebar from "../../components/layout/ResponsiveSidebar";
 
 const DashBoard = () => {

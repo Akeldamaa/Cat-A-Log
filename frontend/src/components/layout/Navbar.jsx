@@ -1,23 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../../pages/Assets/CatALogLogo.png";
 
 export default function Navbar() {
+  const userIsLoggedIn = false;
+
   return (
-    <div>
+    <div className="navbar-container container">
+      <div>
+        <Link to={"/"}>
+          <img className="logo" src={Logo} />
+        </Link>
+      </div>
       <nav className="top-nav">
         <ul className="nav-items">
-          <li>
-            <img className="logo" src={Logo} />
-          </li>
           <li>
             <NavLink
               className={({ isActive }) =>
                 isActive ? "nav-link active" : "nav-link"
               }
-              to="/featured-shelter"
+              to="/"
             >
-              Featured Shelter
+              Home{" "}
             </NavLink>
           </li>
           <li>
@@ -35,33 +39,22 @@ export default function Navbar() {
               className={({ isActive }) =>
                 isActive ? "nav-link active" : "nav-link"
               }
-              to="/signup"
+              to="/featured-shelter"
             >
-              Sign up
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/login"
-            >
-              Login{" "}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/"
-            >
-              Home{" "}
+              Featured Shelter
             </NavLink>
           </li>
         </ul>
       </nav>
+      <div>
+        {userIsLoggedIn ? (
+          <button className="auth-btn">Logout</button>
+        ) : (
+          <Link to={"/login"} className="auth-btn">
+            Login
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
