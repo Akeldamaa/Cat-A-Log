@@ -1,9 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../../pages/Assets/CatALogLogo.png";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 export default function Navbar() {
-  const userIsLoggedIn = false;
+  const privateAxios = useAxiosPrivate();
+  const user = localStorage.getItem("user");
+  const handleLogout = () => {
+    privateAxios
+      .get("/api/auth/logout/")
+      // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        localStorage.removeItem("user");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="navbar-container container">
@@ -47,8 +61,10 @@ export default function Navbar() {
         </ul>
       </nav>
       <div>
-        {userIsLoggedIn ? (
-          <button className="auth-btn">Logout</button>
+        {user ? (
+          <button className="auth-btn" onClick={handleLogout}>
+            Log out
+          </button>
         ) : (
           <Link to={"/login"} className="auth-btn">
             Login

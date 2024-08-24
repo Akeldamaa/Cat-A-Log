@@ -12,6 +12,10 @@ Green: #81c489
   background-color: #fff;
 }
 
+.home-wrapper p {
+  font-family: Poppins;
+}
+
 .banner {
   color: #81c489;
   padding: 15px;
@@ -23,12 +27,9 @@ Green: #81c489
   padding: 20px;
 }
 
-.home-section p ol,
-.home-section p ul {
+.home-section div ol,
+.home-section div ul {
   padding: 20px;
-}
-
-.home-wrapper p {
   font-family: Poppins;
 }
 

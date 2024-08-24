@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { ref } from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
 const schema = yup
   .object({
@@ -39,6 +40,7 @@ const schema = yup
 
 export default function SignupForm() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const {
     register,
@@ -66,9 +68,9 @@ export default function SignupForm() {
         lastName: data.lastName,
       })
       .then((response) => {
-        console.log(response);
-        localStorage.setItem("accessToken", response.data.tokens.access);
-        localStorage.setItem("refreshToken", response.data.tokens.refresh);
+        // console.log(response);
+        localStorage.setItem("user", data.email);
+        setAuth({ accessToken: response.data.accessToken });
         setSuccess({
           success: true,
           neutral: false,

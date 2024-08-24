@@ -14,16 +14,14 @@ export default function WelcomeSection() {
               images of cats, analyze their patterns and characteristics, and
               generate digital trading cards based on rarity.
             </p>
-            <p>
-              <ol>
-                <li>Upload an image of your cat</li>
-                <li>AI Analyzes your image.</li>
-                <li>
-                  Produces a fun trading card with fun facts about your cat!
-                  With the option of Minting them on blockchain.
-                </li>
-              </ol>
-            </p>
+            <ol>
+              <li>Upload an image of your cat</li>
+              <li>AI Analyzes your image.</li>
+              <li>
+                Produces a fun trading card with fun facts about your cat! With
+                the option of Minting them on blockchain.
+              </li>
+            </ol>
           </div>
         </div>
         <div className="column">

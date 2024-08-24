@@ -1,24 +1,24 @@
 
-POST http://127.0.0.1:8000/api/auth/register/ 
+POST http://localhost:8000/api/auth/register/ 
 Content-Type: application/json
 
-{ "email": "adam@gmail.com" , "password": "Pass1234" }
+{ "email": "johndoe@gmail.com" , "password": "Pass1234", "firstName": "John", "lastName": "Doe" }
 
 ###
 
-POST http://127.0.0.1:8000/api/auth/login/
+POST http://localhost:8000/api/auth/login/
 Content-Type: application/json
 
-{ "email": "adam@gmail.com", "password": "Pass1234" }
+{ "email": "johndoe@gmail.com", "password": "Pass1234" }
 
 ###
 
-GET http://127.0.0.1:8000/api/auth/user/ 
+GET http://localhost:8000/api/auth/user/ 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNjgxNDg0LCJpYXQiOjE3MjM2Nzc4ODQsImp0aSI6IjA1MjgwNzkzMzYxZjQ0MWJiZDlkOTAyMTA0NjM3NjViIiwidXNlcl9pZCI6MX0.vhBpRNRv5-hl3JUieHIg0DmAfjud7x1cot1jcuo3xDY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0NTA4NDkxLCJpYXQiOjE3MjQ1MDQ4OTEsImp0aSI6IjM1NWFhOTZhY2Q5YzRiMzc5NzVkNzM0MmJiNDRkMDk1IiwidXNlcl9pZCI6Mn0.zNZsb-dLcb6IVxNbblU6E9yVol7LmNCd3fHrbyGrOlM
 
 ###
 
-GET http://127.0.0.1:8000/api/auth/logout/ 
+GET http://localhost:8000/api/auth/logout/ 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNjgxNDg0LCJpYXQiOjE3MjM2Nzc4ODQsImp0aSI6IjA1MjgwNzkzMzYxZjQ0MWJiZDlkOTAyMTA0NjM3NjViIiwidXNlcl9pZCI6MX0.vhBpRNRv5-hl3JUieHIg0DmAfjud7x1cot1jcuo3xDY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0NTEzMjUzLCJpYXQiOjE3MjQ1MTE0NTMsImp0aSI6IjQ0NjhjMzYyNmIyMjRlNTg5MDEzYzIwNmY5OTI4MzRmIiwidXNlcl9pZCI6Mn0.ttE1XSHR2XLAtXgSHlS2pt_xTUc9wD5Lt32Ttqryac4
