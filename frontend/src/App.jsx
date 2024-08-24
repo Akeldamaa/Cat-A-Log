@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import DashBoard from "./pages/Dashboard/Dashboard";
 import FeaturedShelter from "./pages/FeaturedShelter/FeaturedShelter";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+// import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Error from "./pages/Error/Error";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import AuthenticatedRoutes from "./utils/AuthenticatedRoutes";
@@ -15,7 +15,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="featured-shelter" element={<FeaturedShelter />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
+      {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
       <Route element={<AuthenticatedRoutes />}>
         {/* All authenticated routes (routes that can only be accessed when users are not logged in) are stored here. Remove the signup and login route from here to access them without logging out*/}
         <Route path={"/signup"} element={<Signup />} />

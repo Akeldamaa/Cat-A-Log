@@ -115,9 +115,9 @@ export default function LoginForm() {
         </div>
 
         <div className="login-footer">
-          <Link to="/forgot-password" className="forgot-password">
+          {/* <Link to="/forgot-password" className="forgot-password">
             Forgot Password?
-          </Link>
+          </Link> */}
 
           <Link to="/signup" className="signup-section">
             Create an Account
