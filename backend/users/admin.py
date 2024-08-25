@@ -5,6 +5,7 @@ from .models import User
 
 
 class CustomUserAdmin(UserAdmin):
+    readonly_fields = ['last_login', 'date_joined', 'first_name', 'last_name', 'email']
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User

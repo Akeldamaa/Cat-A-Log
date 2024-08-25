@@ -1,26 +1,27 @@
-.footerContent {
-    text-align: center;
+.footerContainer {
+  background-color: #ffc0cb;
+  padding: 15px 15px 25px;
 }
 
-.footerContent a {
-    text-decoration: none;
-    color: black;
+.footerContainer img {
+  margin: 10px;
+  max-height: 125px;
 }
 
 .logoContainer {
-    text-align: center;
+  text-align: center;
 }
 
-footer {
-    background-color: #ffc0cb;
-    padding: 15px;
+.footerContent {
+  text-align: center;
 }
 
-footer img {
-    margin: 10px;
-    max-height: 125px;
+.footerContent a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
 }
 
-footer a:hover {
-    text-decoration: underline;
+.footerContent a:hover {
+  text-decoration: underline;
 }
