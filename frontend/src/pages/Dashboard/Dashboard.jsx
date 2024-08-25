@@ -5,8 +5,9 @@ import Upload from "./components/Upload/Upload";
 import Analysis from "./components/Analysis/Analysis";
 import Customization from "./components/Customization/Customization";
 import NftMinting from "./components/NftMinting/NftMinting";
-import DataInputForm from "./components/DataInputForm/DataInputForm";
+// import DataInputForm from "./components/DataInputForm/DataInputForm";
 import ResponsiveSidebar from "../../components/layout/ResponsiveSidebar";
+// import TestApi from "../../components/TestApi";
 
 const DashBoard = () => {
   const [cardsData, setCardsData] = useState([]); // State to store the trading cards data
@@ -20,11 +21,12 @@ const DashBoard = () => {
     <div className="dashboard-container">
       <ResponsiveSidebar />
       <div className="content">
+        {/* <TestApi /> */}
         <Welcome />
-      
+
         <Upload onCardsGenerated={handleCardsGenerated} />
         {/* <DataInputForm /> */}
-        
+
         <Analysis cardsData={cardsData} />
         <Customization />
         <NftMinting />

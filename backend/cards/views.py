@@ -8,8 +8,10 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import requests
 import replicate
-import openai
+# import openai
 import logging
+import base64
+from openai import OpenAI
 from backend.settings import MEDIA_ROOT
 
 # Setup logger
@@ -17,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # API keys (replace with your keys)
 REPLICATE_API_KEY = ""
-OPENAI_API_KEY = " "
+OPENAI_API_KEY = ""
 
 # Media root directory
 # MEDIA_ROOT = 'Cat-A-Log/media'
@@ -33,6 +35,69 @@ TEMPLATES = {
 # Replicate API URL and the specific model version we want to use
 REPLICATE_API_URL = "https://api.replicate.com/v1/predictions"
 MODEL_VERSION = "4acb778eb059772225ec213948f0660867b2e03f277448f18cf1800b96a65a1a"
+
+# Function to encode the image
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
+# Set OpenAI API key (make sure to set this environment variable in your system)
+client = OpenAI(
+    api_key="",  # Ensure this is set in your environment variables
+)
+
+# Replicate API Key (if required by your setup)
+replicate_api_key = ""
+
+# Path to your image
+# image_path = "./bengal.jpg"
+
+# Getting the base64 string
+# base64_image = encode_image(image_path)
+
+# Messages payload for the OpenAI API request
+messages = [
+    {
+        "role": "user",
+        "content": (
+            "in a paragraph, give a detailed description of the cat in the picture. "
+            "Only focus on the cat, not the background, the lighting, etc. Avoid subjective comments or opinions. "
+            "Start the paragraph with: The cat is a... To describe different cat pictures effectively, provide the "
+            "following details: Breed or Type: Specify the breed or type of cat if known. Coat Texture and Length: "
+            "Describe the texture (e.g., curly, smooth) and length (e.g., short, long) of the cat's fur. Color and Patterns: "
+            "Mention the color of the cat's fur and any patterns or markings, such as spots, stripes, or patches. Body Shape "
+            "and Size: Describe the cat's overall body shape (e.g., slender, muscular) and size. Distinctive Features: "
+            "Note any unique features, such as a specific marking, eye color, ear shape, or tail length. Facial Features: "
+            "Detail the cat's head shape, eye size and color, ear size and placement, and any distinctive expressions or "
+            "facial markings."
+        ),
+    },
+]
+
+# Function to get the message content from the OpenAI API
+def get_message_content():
+    chat_completion = client.chat.completions.create(
+        messages=messages,
+        model="gpt-4o-mini"
+    )
+    message_content = chat_completion.choices[0].message.content
+    print(message_content)
+    return message_content
+
+# Function to generate images using the Replicate API
+def generate_image(message_content):
+    try:
+        client = replicate.Client(api_token=replicate_api_key)  # Initialize Replicate client
+
+        output = client.run(
+            "fofr/sticker-maker:4acb778eb059772225ec213948f0660867b2e03f277448f18cf1800b96a65a1a",
+            input={"prompt": message_content, "output_quality": 100, "number_of_images": 3}
+        )
+
+        print(output)
+    except Exception as e:
+        print("Error:", e)
+
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
@@ -82,63 +147,72 @@ def upload_images(request):
                 grabcut_pil_img.save(img_byte_arr, format='PNG')
                 img_byte_arr = img_byte_arr.getvalue()
 
-                # Call Replicate API for sticker generation
-                headers = {
-                    "Authorization": f"Token {REPLICATE_API_KEY}",
-                    "Content-Type": "application/json",
-                }
-                data = {
-                    "version": MODEL_VERSION,
-                    "input": {
-                        "image": img_byte_arr
-                    }
-                }
-                response = requests.post(REPLICATE_API_URL, headers=headers, json=data)
+                # # Encode the image bytes to base64
+                # img_base64 = base64.b64encode(img_byte_arr).decode('utf-8')
 
-                if response.status_code != 201:
-                    logger.error(f"Replicate API request failed with status {response.status_code}")
-                    return JsonResponse({'status': 'error', 'message': 'Replicate API request failed'}, status=500)
+                # # Call Replicate API for sticker generation
+                # headers = {
+                #     "Authorization": f"Bearer {REPLICATE_API_KEY}",
+                #     "Content-Type": "application/json",
+                # }
+                # data = {
+                #     "version": MODEL_VERSION,
+                #     "input": {
+                #         "image": img_base64
+                #     }
+                # }
+                # response = requests.post(REPLICATE_API_URL, headers=headers, json=data)
 
-                # The response includes a prediction ID that you need to poll to get the result
-                prediction = response.json()
-                prediction_id = prediction.get('id')
-                if not prediction_id:
-                    logger.error("Replicate API response missing 'id'")
-                    return JsonResponse({'status': 'error', 'message': 'Replicate API response missing ID'}, status=500)
+                # if response.status_code != 201:
+                #     logger.error(f"Replicate API request failed with status {response.status_code}")
+                #     logger.error(response.json())
+                #     return JsonResponse({'status': 'error', 'message': 'Replicate API request failed'}, status=500)
 
-                # Polling the Replicate API until the prediction is complete
-                while True:
-                    prediction_response = requests.get(f"{REPLICATE_API_URL}/{prediction_id}", headers=headers)
-                    prediction_result = prediction_response.json()
-                    if prediction_result['status'] == 'succeeded':
-                        break
-                    elif prediction_result['status'] == 'failed':
-                        logger.error("Replicate prediction failed")
-                        return JsonResponse({'status': 'error', 'message': 'Replicate prediction failed'}, status=500)
+                # # The response includes a prediction ID that you need to poll to get the result
+                # prediction = response.json()
+                # prediction_id = prediction.get('id')
+                # if not prediction_id:
+                #     logger.error("Replicate API response missing 'id'")
+                #     return JsonResponse({'status': 'error', 'message': 'Replicate API response missing ID'}, status=500)
 
-                # Load the sticker result
-                sticker_url = prediction_result['output']
-                sticker_img = Image.open(io.BytesIO(requests.get(sticker_url).content))
-                sticker_img = sticker_img.resize((int(grabcut_pil_img.width * 0.7), int(grabcut_pil_img.height * 0.5)))
-                grabcut_pil_img.paste(sticker_img, (30, 30), sticker_img)
+                # # Polling the Replicate API until the prediction is complete
+                # while True:
+                #     prediction_response = requests.get(f"{REPLICATE_API_URL}/{prediction_id}", headers=headers)
+                #     prediction_result = prediction_response.json()
+                #     if prediction_result['status'] == 'succeeded':
+                #         break
+                #     elif prediction_result['status'] == 'failed':
+                #         logger.error("Replicate prediction failed")
+                #         return JsonResponse({'status': 'error', 'message': 'Replicate prediction failed'}, status=500)
 
-                # Send image to OpenAI for analysis
-                openai.api_key = OPENAI_API_KEY
-                openai_response = openai.Completion.create(
-                    engine="text-davinci-003",
-                    prompt=(
-                        "The cat is a...\n"
-                        "Provide the following details:\n"
-                        "Breed or Type: Specify the breed or type of cat if known.\n"
-                        "If all the cat breeds are categorized into 4 types of rarity, from the most common to the rarest: common, uncommon, rare, legendary, then which category would this cat be in? The answer should follow the format: The cat breed is [category]. Provide some interesting facts about the specific cat breed."
-                    ),
-                    max_tokens=150
-                )
+                # # Load the sticker result
+                # sticker_url = prediction_result['output'][0]
+                # sticker_img = Image.open(io.BytesIO(requests.get(sticker_url).content))
+                # sticker_img = sticker_img.resize((int(grabcut_pil_img.width * 0.7), int(grabcut_pil_img.height * 0.5)))
+                # grabcut_pil_img.paste(sticker_img, (30, 30), sticker_img)
 
-                gpt_text = openai_response['choices'][0]['text']
+                # # Send image to OpenAI for analysis
+                # client = OpenAI()
+                # openai.api_key = OPENAI_API_KEY
+                # openai_response = openai.Completion.create(
+                #     engine="text-davinci-003",
+                #     prompt=(
+                #         "The cat is a...\n"
+                #         "Provide the following details:\n"
+                #         "Breed or Type: Specify the breed or type of cat if known.\n"
+                #         "If all the cat breeds are categorized into 4 types of rarity, from the most common to the rarest: common, uncommon, rare, legendary, then which category would this cat be in? The answer should follow the format: The cat breed is [category]. Provide some interesting facts about the specific cat breed."
+                #     ),
+                #     max_tokens=150
+                # )
+
+                message_content = get_message_content()  # Get description from OpenAI
+                generate_image(message_content)  # Use description to generate images with Replicate
+
+
+                # gpt_text = openai_response['choices'][0]['text']
                 rarity = None
                 for r in TEMPLATES.keys():
-                    if r in gpt_text.lower():
+                    if r in message_content.lower():
                         rarity = r
                         break
 
@@ -157,11 +231,11 @@ def upload_images(request):
                 font = ImageFont.load_default()
 
                 # Add breed
-                breed_text = "Species: " + gpt_text.split("\n")[0].replace("The cat breed is", "").strip()
+                breed_text = "Species: " + message_content.split("\n")[0].replace("The cat breed is", "").strip()
                 draw.text((30, template_img.height - 60), breed_text, (0, 0, 0), font=font)
 
                 # Add description
-                description_text = gpt_text.split("\n")[1].replace("Provide some interesting facts about the specific cat breed.", "").strip()
+                description_text = message_content.split("\n")[1].replace("Provide some interesting facts about the specific cat breed.", "").strip()
                 draw.text((30, template_img.height - 40), "Description: " + description_text, (0, 0, 0), font=font)
 
                 # Save the final trading card image

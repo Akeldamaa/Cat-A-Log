@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const schema = yup
   .object({
@@ -15,6 +16,7 @@ const schema = yup
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const {
     register,
@@ -40,8 +42,8 @@ export default function LoginForm() {
       })
       .then((response) => {
         // console.log(response);
-        localStorage.setItem("accessToken", response.data.tokens.access);
-        localStorage.setItem("refreshToken", response.data.tokens.refresh);
+        localStorage.setItem("user", data.email);
+        setAuth({ accessToken: response.data.accessToken });
         setSuccess({
           success: true,
           neutral: false,
@@ -113,9 +115,9 @@ export default function LoginForm() {
         </div>
 
         <div className="login-footer">
-          <Link to="/forgot-password" className="forgot-password">
+          {/* <Link to="/forgot-password" className="forgot-password">
             Forgot Password?
-          </Link>
+          </Link> */}
 
           <Link to="/signup" className="signup-section">
             Create an Account

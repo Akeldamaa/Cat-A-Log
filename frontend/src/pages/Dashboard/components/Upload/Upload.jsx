@@ -4,7 +4,8 @@ import { UploadIcon } from "../../../../components/ui/icons";
 import ProgressBar from "../../../../components/ProgressBar";
 import "./Upload.css";
 
-function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
+function Upload({ onCardsGenerated }) {
+  // Receive the onCardsGenerated prop
   const [previewImages, setPreviewImages] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(null);
   const [showSendOffButton, setShowSendOffButton] = useState(false);
@@ -16,21 +17,21 @@ function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
     setUploadStatus(null);
     setShowSendOffButton(false);
     setPreviewImages([]);
-  
+
     const formData = new FormData();
     Array.from(files).forEach((file) => {
       formData.append("images", file);
     });
-  
+
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/upload/", {
+      const response = await fetch("http://127.0.0.1:8000/api/cards/upload/", {
         method: "POST",
         body: formData,
       });
-  
+
       const result = await response.json();
-      console.log("Full API Response:", result);  // Log full API response for debugging
-  
+      console.log("Full API Response:", result); // Log full API response for debugging
+
       if (response.ok && result.status === "success" && result.cards) {
         onCardsGenerated(result.cards);
         setPreviewImages(files.map((file) => URL.createObjectURL(file)));
@@ -46,8 +47,7 @@ function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
       setLoading(false);
     }
   };
-  
-  
+
   const handleSendOff = () => {
     setUploadStatus("Upload successful!"); // Show success message when "Send off" button is clicked
     setShowSendOffButton(false); // Hide the "Send off" button after it's clicked
@@ -96,9 +96,7 @@ function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
           </Button>
         </div>
       </div>
-
       {loading && <ProgressBar />} {/* Display progress bar during loading */}
-
       {previewImages.length > 0 && (
         <div className="preview-container">
           {previewImages.map((src, index) => (
@@ -111,7 +109,6 @@ function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
           ))}
         </div>
       )}
-
       {showSendOffButton && (
         <Button
           variant="default"
@@ -121,7 +118,6 @@ function Upload({ onCardsGenerated }) { // Receive the onCardsGenerated prop
           Send off
         </Button>
       )}
-
       {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
     </div>
   );

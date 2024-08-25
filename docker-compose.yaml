@@ -11,14 +11,16 @@ services:
     build: 
       context: ./frontend
     volumes:
-      - node_modules:/home/app/node_modules
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
 
   nginx:
     container_name: nginx
     build: 
       context: ./nginx
     ports:
-      - "3000:80"
+      - "80:80"
+      - "443:443"
     depends_on:
       - backend
       - frontend

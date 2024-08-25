@@ -1,24 +1,40 @@
 /* 
-Color Pallete Reference Guide:
+Color Palette Reference Guide:
 Blue: #95b3ff
 Pink: #ffc0cb
 Green: #81c489
 */
 
-.featured-section {
+.featuredShelter {
   padding: 20px;
 }
 
-.featured-section .content-p {
+.featuredShelter .why-donate {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.featuredShelter-section .content-p {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto;
 }
 
-.featured-section .donateToday {
-  float: right;
-  text-align: right;
+.featuredShelter-section .donateToday {
   border-radius: 10px;
-  width: 300px;
-  margin: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.featuredShelter .weekly-shelter {
+  margin-bottom: 40px;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 800px) {
+  .featuredShelter .why-donate {
+    flex-direction: column;
+  }
 }
