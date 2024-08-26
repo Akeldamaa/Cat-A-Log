@@ -45,6 +45,28 @@ Green: #81c489
 
 .upload-button {
   margin-top: 10px;
+  padding: 5px 20px;
+  background: #e1e1e1;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.upload-button:hover {
+  background: #ccc;
+}
+
+.send-off-button {
+  background: #81c489;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-family: inherit;
+  font-size: 16px;
 }
 
 /* Preview Section */
@@ -55,9 +77,14 @@ Green: #81c489
   flex-wrap: wrap;
 }
 
+.preview-image-wrapper {
+  width: 200px;
+}
+
 .preview-image {
-  width: 100px;
-  height: 100px;
+  /* width: 200px; */
+  /* height: 200px; */
+  width: 100%;
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid #ccc;
@@ -66,4 +93,11 @@ Green: #81c489
 .upload-status {
   margin-top: 10px;
   color: #333;
+  font-size: 14px;
+}
+
+.error-msg {
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
 }

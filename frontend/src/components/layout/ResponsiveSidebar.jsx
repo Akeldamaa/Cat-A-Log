@@ -4,25 +4,25 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Avatar, AvatarImage } from "../ui/Avatar";
 import {
   Home,
-  Brush,
+  // Brush,
   Logout,
   FileUpload,
   ImageSearch,
-  CurrencyExchange,
+  // CurrencyExchange,
   Fullscreen,
   FullscreenExit,
+  Image,
 } from "@mui/icons-material";
 import { ToggleButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import axios from "../../api/axios";
 
 function ResponsiveSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const privateAxios = useAxiosPrivate();
 
   const handleLogout = () => {
-    privateAxios
+    axios
       .get("/api/auth/logout/")
       // eslint-disable-next-line no-unused-vars
       .then((response) => {
@@ -71,20 +71,23 @@ function ResponsiveSidebar() {
         >
           Analysis
         </MenuItem>
-        <MenuItem
+        <MenuItem className="menu-item" icon={<Image />} href="#past-cards">
+          Past Cards{" "}
+        </MenuItem>
+        {/* <MenuItem
           className="menu-item"
           icon={<Brush />}
           href="#customization-section"
         >
           Customization
-        </MenuItem>
-        <MenuItem
+        </MenuItem> */}
+        {/* <MenuItem
           className="menu-item"
           icon={<CurrencyExchange />}
           href="#nft-section"
         >
           NFT Minting
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           className="menu-item"
           icon={<Logout />}

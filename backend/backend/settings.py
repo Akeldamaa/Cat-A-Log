@@ -51,7 +51,27 @@ SITE_URL = config(
     cast=str,
     default='http://localhost:8000'
 )  # Default to Django Dev Server
-
+OPENAI_API_KEY = config(
+    "OPENAI_API_KEY",
+    cast=str,
+)
+REPLICATE_API_KEY = config(
+    "REPLICATE_API_KEY",
+    cast=str,
+)
+# Cloudinary secrets
+CLOUDINARY_CLOUD_NAME = config(
+    "CLOUDINARY_CLOUD_NAME",
+    cast=str,
+)
+CLOUDINARY_API_KEY = config(
+    "CLOUDINARY_API_KEY",
+    cast=str,
+)
+CLOUDINARY_API_SECRET = config(
+    "CLOUDINARY_API_SECRET",
+    cast=str,
+)
 
 # Application definition
 

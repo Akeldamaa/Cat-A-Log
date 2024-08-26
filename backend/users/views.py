@@ -128,14 +128,13 @@ class UserViewAPI(APIView):
 
 class UserLogoutViewAPI(APIView):
 	authentication_classes = (JWTAuthentication,)
-	permission_classes = (IsAuthenticated,)
+	permission_classes = (AllowAny,)
 
 	@swagger_auto_schema(
 		tags=['auth'],
 		operation_description="Logout user",
 		responses={
 				200: "Success",
-				401: "Unauthorized",
 		},
 	)
 	def get(self, request):

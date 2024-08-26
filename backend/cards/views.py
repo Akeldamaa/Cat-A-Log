@@ -1,6 +1,11 @@
 from django.http import JsonResponse
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Card
+from .serializers import CardSerializer
 import os
 import io
 import cv2
@@ -11,24 +16,34 @@ import replicate
 import base64
 import textwrap
 import logging
+from backend.settings import OPENAI_API_KEY, REPLICATE_API_KEY, MEDIA_ROOT, BASE_DIR
+from django.core.files import File
+import cloudinary
+import cloudinary.uploader
+from backend.settings import CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME
+
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
+    secure= True
+)
 
 # Setup logger
 logger = logging.getLogger(__name__)
 
-# API keys
-REPLICATE_API_KEY = ""
-OPENAI_API_KEY = ""
-MEDIA_ROOT = '/backend/media'
-
 TEMPLATES = {
-    "common": os.path.join('/media/uploads/templates', 'green.png'),
-    "uncommon": os.path.join('/media/uploads/templates', 'blue.png'),
-    "rare": os.path.join('/media/uploads/templates', 'purple.png'),
-    "legendary": os.path.join('/Users/trangvuthao/document/media/uploads/templates', 'orange.png')
+    "common": os.path.join(BASE_DIR, 'templates', 'green.png'),
+    "uncommon": os.path.join(BASE_DIR, 'templates', 'blue.png'),
+    "rare": os.path.join(BASE_DIR, 'templates', 'purple.png'),
+    "legendary": os.path.join(BASE_DIR, 'templates', 'orange.png')
 }
 
 # Path to your custom font
-FONT_PATH = '/Users/trangvuthao/document/media/uploads/templates/DelaGothicOne-Regular.ttf'
+FONT_PATH = os.path.join(BASE_DIR, 'fonts', 'DelaGothicOne-Regular.ttf')
+print(FONT_PATH)
+
 
 def encode_image(image_path):
     """Encode image to base64."""
@@ -85,26 +100,46 @@ def generate_image(message_content):
     )
     return output
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_cards(request):
+    """Get all cards created by the authenticated user."""
+    user = request.user
+    cards = Card.objects.filter(user=user)
+    serializer = CardSerializer(cards, many=True)
+    return Response(data={"cards": serializer.data}, status=status.HTTP_200_OK)
+
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
-def upload_images(request):
+@permission_classes([IsAuthenticated])
+def create_card(request):
     """Upload images, process them, generate descriptions, and create stickers."""
     if request.method == 'POST':
-        images = request.FILES.getlist('images')
-        responses = []
+        #  Get the user from the request
+        user = request.user
 
-        try:
-            # Ensure the uploads directory exists
-            upload_dir = os.path.join(MEDIA_ROOT, 'uploads')
-            cards_dir = os.path.join(MEDIA_ROOT, 'cards')
-            if not os.path.exists(upload_dir):
-                os.makedirs(upload_dir, exist_ok=True)
-                logger.info(f"Created directory: {upload_dir}")
-            if not os.path.exists(cards_dir):
-                os.makedirs(cards_dir, exist_ok=True)
-                logger.info(f"Created directory: {cards_dir}")
+        # Validate the request data
+        serializer = CardSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            # continue image processing
+            images = request.FILES.getlist('images')
+            # only process the first image
+            image = images[0]
+            responses = []
 
-            for image in images:
+            try:
+                # Ensure the uploads directory exists
+                upload_dir = os.path.join(MEDIA_ROOT, 'uploads')
+                cards_dir = os.path.join(MEDIA_ROOT, 'cards')
+                if not os.path.exists(upload_dir):
+                    os.makedirs(upload_dir, exist_ok=True)
+                    logger.info(f"Created directory: {upload_dir}")
+                if not os.path.exists(cards_dir):
+                    os.makedirs(cards_dir, exist_ok=True)
+                    logger.info(f"Created directory: {cards_dir}")
+                
+                # uncomment the next line when we start processing multiple images
+                # for image in images:
                 # Save the uploaded image
                 file_path = os.path.join(upload_dir, image.name)
                 with open(file_path, 'wb+') as destination:
@@ -214,18 +249,26 @@ def upload_images(request):
                 final_card_path = os.path.join(cards_dir, final_card_filename)
                 trading_card.save(final_card_path)
 
-                # Construct the response data
-                response_data = {
-                    "trading_card": final_card_path,  # Path to the final trading card image
-                    "analysis": description,
-                    "detailed_description": detailed_description,
-                }
-                responses.append(response_data)
+                # upload the final trading card image to Cloudinary
+                uploaded_image = cloudinary.uploader.upload(final_card_path, folder='cards')
 
-            return JsonResponse({'status': 'success', 'cards': responses})
+                # save the final trading card image, analysis and description to the database
+                serializer.save(user=user, url=uploaded_image['secure_url'], public_id=uploaded_image['public_id'], description=description)
 
-        except Exception as e:
-            logger.error(f"An error occurred during processing: {str(e)}", exc_info=True)
-            return JsonResponse({'status': 'error', 'message': 'Internal server error.'}, status=500)
+                # append the serialized card to the responses list. useful for returning multiple cards
+                responses.append(serializer.data)
 
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+                # delete grabcut image and initial image and card image
+                os.remove(grabcut_image_path)
+                os.remove(final_card_path)
+                os.remove(file_path)
+
+                return Response(data={'cards': responses}, status=status.HTTP_201_CREATED)
+
+            except Exception as e:
+                logger.error(f"An error occurred during processing: {str(e)}", exc_info=True)
+                return Response(data={'message': 'Internal server error.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(data={'message': 'Invalid request method.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
