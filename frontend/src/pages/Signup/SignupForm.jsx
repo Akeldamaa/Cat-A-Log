@@ -14,13 +14,13 @@ const schema = yup
       .string()
       .required("First Name cannot be blank.")
       .matches(/^[A-Za-z.\s_-]+$/, "Can only be A-Z characters")
-      .min(3, "First Name must be at least 3 characters.")
+      .min(1, "First Name must be at least 1 character.")
       .max(30, "First Name cannot exceed 30 characters."),
     lastName: yup
       .string()
       .required("Last Name cannot be blank.")
       .matches(/^[A-Za-z.\s_-]+$/, "Can only be A-Z characters")
-      .min(3, "Last Name must be at least 3 characters.")
+      .min(31, "Last Name must be at least 1 character.")
       .max(30, "Last Name cannot exceed 30 characters."),
     email: yup
       .string()
