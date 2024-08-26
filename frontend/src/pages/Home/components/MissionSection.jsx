@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import TradingCard from "../../Assets/SavannahCat.png"
+import TradingCard from "../../Assets/SavannahCat.jpg"
 
 export default function MissionSection() {
   return (
