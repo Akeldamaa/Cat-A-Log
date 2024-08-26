@@ -9,6 +9,10 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from drf_yasg.utils import swagger_auto_schema 
+import requests
+from django.utils import timezone
+from backend.settings import SITE_URL
+
 
 
 class UserRegistrationAPIView(APIView):
@@ -26,13 +30,22 @@ class UserRegistrationAPIView(APIView):
 		request_body=UserRegistrationSerializer
 	)
 	def post(self, request):
-		serializer = self.serializer_class(data=request.data)
+		data = {
+			'email': request.data.get('email'),
+			'password': request.data.get('password'),
+			'first_name': request.data.get('firstName'),
+			'last_name': request.data.get('lastName')
+		}
+		serializer = self.serializer_class(data=data)
 		if serializer.is_valid():
 			new_user = serializer.save()
 			if new_user:
 				tokens = get_tokens_for_user(new_user)
-				data = { 'tokens': tokens }
-				response = Response(data, status=status.HTTP_201_CREATED)
+				response = Response(status=status.HTTP_201_CREATED)
+				response.set_cookie('refresh_token', tokens['refresh'], httponly=True)
+				response.data = {
+					'accessToken': tokens['access']
+				}
 				return response
 		default_errors = serializer.errors
 		new_error = {}
@@ -73,10 +86,15 @@ class UserLoginAPIView(APIView):
 			raise AuthenticationFailed('Email or password is incorrect.')
 
 		if user_instance.is_active:
+			# update last login and save
+			user_instance.last_login = timezone.now()
+			user_instance.save()
+
 			tokens = get_tokens_for_user(user_instance)
 			response = Response(status=status.HTTP_200_OK)
+			response.set_cookie('refresh_token', tokens['refresh'], httponly=True)
 			response.data = {
-				'tokens': tokens
+				'accessToken': tokens['access']
 			}
 			return response
 
@@ -121,6 +139,50 @@ class UserLogoutViewAPI(APIView):
 		},
 	)
 	def get(self, request):
-		return Response({"message": "User logged out successfully."})
+		response = Response(status=status.HTTP_200_OK)
+		response.delete_cookie('refresh_token')
+		response.data = {
+			'message': 'User logged out successfully.'
+		}
+		return response
+		
+	
+
+class UserRefreshTokenViewAPI(APIView):
+	authentication_classes = (JWTAuthentication,)
+	permission_classes = (AllowAny,)
+
+	@swagger_auto_schema(
+		tags=['auth'],
+		operation_description="Refresh tokens",
+		responses={
+				200: "Success",
+				401: "Unauthorized",
+		},
+	)
+
+	def get(self, request):
+		token = request.COOKIES.get('refresh_token')
+		if not token:
+			raise AuthenticationFailed('Authentication credentials were not provided.')
+		
+		data = {
+			'refresh': token
+		}
+		token_response = requests.post(
+			f"{SITE_URL}/api/token/refresh/",
+			data=data
+    )
+
+		if token_response.status_code == 401:
+			raise AuthenticationFailed('Invalid refresh token.')
+		
+		token = token_response.json()
+		response = Response(status=status.HTTP_200_OK)
+		response.data = {
+			'accessToken': token['access']
+		}
+		return response
+
 
 

@@ -14,15 +14,24 @@ import {
 } from "@mui/icons-material";
 import { ToggleButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function ResponsiveSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const privateAxios = useAxiosPrivate();
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    navigate("/");
+    privateAxios
+      .get("/api/auth/logout/")
+      // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        localStorage.removeItem("user");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
