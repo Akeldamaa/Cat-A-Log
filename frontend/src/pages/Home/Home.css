@@ -1,10 +1,8 @@
 /* 
-
 Color Palette Reference Guide:
 Blue: #95b3ff
 Pink: #ffc0cb
 Green: #81c489
-
 */
 
 .home-wrapper {
@@ -52,11 +50,11 @@ Green: #81c489
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mission-statement {
+.mission-section {
   padding-bottom: 40px;
 }
 
-.mission-statement h2 {
+.mission-section h2 {
   text-align: center;
 }
 
@@ -72,6 +70,12 @@ Green: #81c489
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+}
+
+.mission-section .flex-container {
+  display: grid;
+  grid-template-columns: .5fr 1fr;
+  gap: 40px
 }
 
 .features-section .column {
@@ -93,6 +97,16 @@ Green: #81c489
   text-align: center;
 }
 
+.mission-section .tradingCard {
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 @media (max-width: 800px) {
   .welcome-section .flex-container {
@@ -100,6 +114,10 @@ Green: #81c489
   }
 
   .features-section .flex-container {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-section .flex-container {
     grid-template-columns: 1fr;
   }
 }
