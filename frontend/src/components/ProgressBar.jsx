@@ -5,7 +5,7 @@ const ProgressBar = () => {
 
   useEffect(() => {
     // Define the interval duration in milliseconds
-    const intervalDuration = 150; // Update every 500ms
+    const intervalDuration = 400; // Update every 400ms
 
     // Create an interval to update the progress
     const interval = setInterval(() => {

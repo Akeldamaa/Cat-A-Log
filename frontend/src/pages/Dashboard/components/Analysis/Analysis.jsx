@@ -10,14 +10,14 @@ function Analysis({ cardsData }) {
           cardsData.map((card, index) => (
             <div key={index} className="image-container">
               <img
-                src={card.image} // Adjust this path if needed
+                src={card.url} // Adjust this path if needed
                 alt={`Generated Card ${index + 1}`}
                 className="image"
               />
 
               <div className="image-info">
                 {/* <div className="image-breed"></div> */}
-                <div className="image-characteristics">{card.analysis}</div>
+                <div className="image-characteristics">{card.description}</div>
               </div>
             </div>
           ))

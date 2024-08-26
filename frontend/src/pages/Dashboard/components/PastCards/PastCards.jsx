@@ -1,6 +1,7 @@
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import "./PastCards.css";
 import { useState, useEffect } from "react";
+import download from "downloadjs";
 
 const PastCards = () => {
   const [cards, setCards] = useState([]);
@@ -18,6 +19,10 @@ const PastCards = () => {
     // eslint-disable-next-line
   }, []);
 
+  const downloadImg = (url) => {
+    download(url);
+  };
+
   return (
     <div id="past-cards" className="section past-cards">
       <h2 className="section-title">Past Cards</h2>
@@ -26,10 +31,17 @@ const PastCards = () => {
           cards.map((card, index) => (
             <div key={index} className="card">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}${card.image}`} // Adjust this path if needed
+                src={card.url} // Adjust this path if needed
                 alt={`Generated Card ${index + 1}`}
                 className="card-image"
               />
+
+              <button
+                onClick={() => downloadImg(card.url)}
+                className="download-card-btn"
+              >
+                Download
+              </button>
 
               {/* <div className="card-info">
                 <div className="card-breed">{card.breed}</div>

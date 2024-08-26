@@ -59,7 +59,19 @@ REPLICATE_API_KEY = config(
     "REPLICATE_API_KEY",
     cast=str,
 )
-
+# Cloudinary secrets
+CLOUDINARY_CLOUD_NAME = config(
+    "CLOUDINARY_CLOUD_NAME",
+    cast=str,
+)
+CLOUDINARY_API_KEY = config(
+    "CLOUDINARY_API_KEY",
+    cast=str,
+)
+CLOUDINARY_API_SECRET = config(
+    "CLOUDINARY_API_SECRET",
+    cast=str,
+)
 
 # Application definition
 

@@ -18,15 +18,26 @@ import textwrap
 import logging
 from backend.settings import OPENAI_API_KEY, REPLICATE_API_KEY, MEDIA_ROOT, BASE_DIR
 from django.core.files import File
+import cloudinary
+import cloudinary.uploader
+from backend.settings import CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME
+
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
+    secure= True
+)
 
 # Setup logger
 logger = logging.getLogger(__name__)
 
 TEMPLATES = {
-    "common": os.path.join(MEDIA_ROOT, 'templates', 'green.png'),
-    "uncommon": os.path.join(MEDIA_ROOT, 'templates', 'blue.png'),
-    "rare": os.path.join(MEDIA_ROOT, 'templates', 'purple.png'),
-    "legendary": os.path.join(MEDIA_ROOT, 'templates', 'orange.png')
+    "common": os.path.join(BASE_DIR, 'templates', 'green.png'),
+    "uncommon": os.path.join(BASE_DIR, 'templates', 'blue.png'),
+    "rare": os.path.join(BASE_DIR, 'templates', 'purple.png'),
+    "legendary": os.path.join(BASE_DIR, 'templates', 'orange.png')
 }
 
 # Path to your custom font
@@ -238,19 +249,19 @@ def create_card(request):
                 final_card_path = os.path.join(cards_dir, final_card_filename)
                 trading_card.save(final_card_path)
 
-                
+                # upload the final trading card image to Cloudinary
+                uploaded_image = cloudinary.uploader.upload(final_card_path, folder='cards')
+
                 # save the final trading card image, analysis and description to the database
-                with open(final_card_path, 'rb') as f:
-                    new_image = File(f)
-                    card = serializer.save(user=user, image=final_card_filename, analysis=description, description=detailed_description)
-                    card.image.save(os.path.basename(final_card_path), new_image, save=True)
+                serializer.save(user=user, url=uploaded_image['secure_url'], public_id=uploaded_image['public_id'], description=description)
 
                 # append the serialized card to the responses list. useful for returning multiple cards
                 responses.append(serializer.data)
 
-                # delete grabcut image and initial card
+                # delete grabcut image and initial image and card image
                 os.remove(grabcut_image_path)
                 os.remove(final_card_path)
+                os.remove(file_path)
 
                 return Response(data={'cards': responses}, status=status.HTTP_201_CREATED)
 

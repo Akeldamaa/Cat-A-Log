@@ -15,3 +15,20 @@ Green: #81c489
 .cards-container .card img {
   width: 100%;
 }
+
+.download-card-btn {
+  background: #81c489;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.download-card-btn:hover {
+  background: #6aa97a;
+}
