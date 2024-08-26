@@ -1,5 +1,5 @@
-import React from "react";
 import "./Analysis.css";
+import PropTypes from "prop-types";
 
 function Analysis({ cardsData }) {
   return (
@@ -9,15 +9,15 @@ function Analysis({ cardsData }) {
         {cardsData && cardsData.length > 0 ? (
           cardsData.map((card, index) => (
             <div key={index} className="image-container">
-           <img
-  src={`http://127.0.0.1:8000${card.trading_card}`}  // Adjust this path if needed
-  alt={`Generated Card ${index + 1}`}
-  className="image"
-/>
+              <img
+                src={card.image} // Adjust this path if needed
+                alt={`Generated Card ${index + 1}`}
+                className="image"
+              />
 
               <div className="image-info">
-                <div className="image-breed">Species: {card.species}</div>
-                <div className="image-characteristics">Description: {card.analysis}</div>
+                {/* <div className="image-breed"></div> */}
+                <div className="image-characteristics">{card.analysis}</div>
               </div>
             </div>
           ))
@@ -28,5 +28,9 @@ function Analysis({ cardsData }) {
     </div>
   );
 }
+
+Analysis.propTypes = {
+  cardsData: PropTypes.array,
+};
 
 export default Analysis;

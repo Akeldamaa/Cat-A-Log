@@ -51,6 +51,14 @@ SITE_URL = config(
     cast=str,
     default='http://localhost:8000'
 )  # Default to Django Dev Server
+OPENAI_API_KEY = config(
+    "OPENAI_API_KEY",
+    cast=str,
+)
+REPLICATE_API_KEY = config(
+    "REPLICATE_API_KEY",
+    cast=str,
+)
 
 
 # Application definition

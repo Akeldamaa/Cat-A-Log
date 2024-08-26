@@ -4,11 +4,11 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Avatar, AvatarImage } from "../ui/Avatar";
 import {
   Home,
-  Brush,
+  // Brush,
   Logout,
   FileUpload,
   ImageSearch,
-  CurrencyExchange,
+  // CurrencyExchange,
   Fullscreen,
   FullscreenExit,
 } from "@mui/icons-material";
@@ -70,20 +70,20 @@ function ResponsiveSidebar() {
         >
           Analysis
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           className="menu-item"
           icon={<Brush />}
           href="#customization-section"
         >
           Customization
-        </MenuItem>
-        <MenuItem
+        </MenuItem> */}
+        {/* <MenuItem
           className="menu-item"
           icon={<CurrencyExchange />}
           href="#nft-section"
         >
           NFT Minting
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           className="menu-item"
           icon={<Logout />}

@@ -24,8 +24,7 @@ Green: #81c489
 }
 
 .image {
-  width: 100px;
-  height: 100px;
+  width: 300px;
   object-fit: cover;
   border-radius: 8px;
 }

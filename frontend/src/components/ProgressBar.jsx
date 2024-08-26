@@ -5,7 +5,7 @@ const ProgressBar = () => {
 
   useEffect(() => {
     // Define the interval duration in milliseconds
-    const intervalDuration = 100; // Update every 100ms
+    const intervalDuration = 150; // Update every 500ms
 
     // Create an interval to update the progress
     const interval = setInterval(() => {
@@ -29,6 +29,7 @@ const ProgressBar = () => {
         backgroundColor: "#e0e0e0",
         borderRadius: "4px",
         overflow: "hidden",
+        position: "relative",
       }}
     >
       <div
@@ -40,11 +41,23 @@ const ProgressBar = () => {
           color: "white",
           lineHeight: "30px",
           borderRadius: "4px",
-          transition: "width 0.1s ease-in-out",
+          transition: "width 2s ease",
+        }}
+      ></div>
+      <p
+        style={{
+          position: "absolute",
+          width: "100%",
+          textAlign: "center",
+          color: "white",
+          fontSize: "16px",
+          top: "50%",
+          left: 0,
+          transform: "translateY(-50%)",
         }}
       >
         {progress}%
-      </div>
+      </p>
     </div>
   );
 };
