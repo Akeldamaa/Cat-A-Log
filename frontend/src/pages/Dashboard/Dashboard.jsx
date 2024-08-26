@@ -7,6 +7,7 @@ import Analysis from "./components/Analysis/Analysis";
 // import NftMinting from "./components/NftMinting/NftMinting";
 // import DataInputForm from "./components/DataInputForm/DataInputForm";
 import ResponsiveSidebar from "../../components/layout/ResponsiveSidebar";
+import PastCards from "./components/PastCards/PastCards";
 // import TestApi from "../../components/TestApi";
 
 const DashBoard = () => {
@@ -28,6 +29,7 @@ const DashBoard = () => {
         {/* <DataInputForm /> */}
 
         <Analysis cardsData={cardsData} />
+        <PastCards />
         {/* <Customization /> */}
         {/* <NftMinting /> */}
       </div>

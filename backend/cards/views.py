@@ -89,6 +89,15 @@ def generate_image(message_content):
     )
     return output
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_cards(request):
+    """Get all cards created by the authenticated user."""
+    user = request.user
+    cards = Card.objects.filter(user=user)
+    serializer = CardSerializer(cards, many=True)
+    return Response(data={"cards": serializer.data}, status=status.HTTP_200_OK)
+
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 @permission_classes([IsAuthenticated])

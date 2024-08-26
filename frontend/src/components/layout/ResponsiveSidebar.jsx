@@ -11,6 +11,7 @@ import {
   // CurrencyExchange,
   Fullscreen,
   FullscreenExit,
+  Image,
 } from "@mui/icons-material";
 import { ToggleButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -69,6 +70,9 @@ function ResponsiveSidebar() {
           href="#analysis-section"
         >
           Analysis
+        </MenuItem>
+        <MenuItem className="menu-item" icon={<Image />} href="#past-cards">
+          Past Cards{" "}
         </MenuItem>
         {/* <MenuItem
           className="menu-item"
