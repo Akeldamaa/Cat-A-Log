@@ -41,7 +41,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    #  path('api/upload/', views.upload_images, name='upload_images'),
+    # path('api/upload/', views.upload_images, name='upload_images'),
     path('api/cards/', include('cards.urls')), 
     path('api/auth/', include('users.urls')),
     # JWT token URLs 
@@ -51,4 +51,7 @@ urlpatterns = [
     path('docs<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'), 
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'), 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

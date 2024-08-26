@@ -1,5 +1,5 @@
 /* 
-Color Pallete Reference Guide:
+Color Palette Reference Guide:
 Blue: #95b3ff
 Pink: #ffc0cb
 Green: #81c489
@@ -24,8 +24,7 @@ Green: #81c489
 }
 
 .image {
-  width: 100px;
-  height: 100px;
+  width: 300px;
   object-fit: cover;
   border-radius: 8px;
 }

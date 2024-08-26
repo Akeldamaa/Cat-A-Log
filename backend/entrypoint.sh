@@ -11,4 +11,4 @@ echo "Static files collected"
 
 echo "Starting server..."
 # gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --timeout 200 --workers 3
-gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --workers 2
+gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --worker-class gevent --timeout 1000

@@ -1,13 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../../pages/Assets/CatALogLogo.png";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import axios from "../../api/axios";
 
 export default function Navbar() {
-  const privateAxios = useAxiosPrivate();
   const user = localStorage.getItem("user");
   const handleLogout = () => {
-    privateAxios
+    axios
       .get("/api/auth/logout/")
       // eslint-disable-next-line no-unused-vars
       .then((response) => {
