@@ -3,6 +3,7 @@ services:
     container_name: backend
     build: 
       context: ./backend
+      target: prod
     ports:
       - "8000:8000"
 
@@ -10,14 +11,15 @@ services:
     container_name: frontend
     build: 
       context: ./frontend
+      target: prod
     volumes:
-      - ./:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - node_modules:/app/node_modules
 
   nginx:
     container_name: nginx
     build: 
       context: ./nginx
+      target: prod
     ports:
       - "80:80"
       - "443:443"

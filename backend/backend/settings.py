@@ -29,13 +29,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SECRET_KEY = config(
     "DJANGO_SECRET_KEY",
     cast=str,
-    default='django-insecure-077(kte%zl$*ks@8h0-jqxn%mvsfr1%35t!_5quwlv)1fxw9+p'
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', '.catalog-trading.fun']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.catalog-trading.fun']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Vite Development Server
     'http://localhost:3000',  # Docker Dev Frontend Server

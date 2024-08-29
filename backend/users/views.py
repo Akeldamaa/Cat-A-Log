@@ -35,8 +35,8 @@ class UserRegistrationAPIView(APIView):
 		data = {
 			'email': request.data.get('email'),
 			'password': request.data.get('password'),
-			'first_name': request.data.get('firstName'),
-			'last_name': request.data.get('lastName')
+			'first_name': request.data.get('firstName') if request.data.get('firstName') else request.data.get('first_name'),
+			'last_name': request.data.get('lastName') if request.data.get('lastName') else request.data.get('last_name')
 		}
 		# validate data
 		serializer = self.serializer_class(data=data)

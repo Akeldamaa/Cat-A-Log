@@ -1,0 +1,43 @@
+services:
+  backend:
+    container_name: backend
+    build: 
+      context: ./backend
+      target: dev
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres_password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./frontend
+      target: dev
+    volumes:
+      - node_modules:/app/node_modules
+
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./nginx
+      target: dev
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  db-data:
+  node_modules:
