@@ -2,10 +2,12 @@ import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import "./PastCards.css";
 import { useState, useEffect } from "react";
 import download from "downloadjs";
+import { useNavigate } from "react-router-dom";
 
 const PastCards = () => {
   const [cards, setCards] = useState([]);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosPrivate
@@ -14,7 +16,11 @@ const PastCards = () => {
         setCards(res.data.cards);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
+        if (error.status === 401) {
+          localStorage.removeItem("user");
+          navigate("/login");
+        }
       });
     // eslint-disable-next-line
   }, []);
