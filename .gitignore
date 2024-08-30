@@ -123,3 +123,4 @@ exclude-list.txt
 catalog-app.pem
 nginx/*.fun
 node_modules
+.DS_Store

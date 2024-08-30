@@ -5,6 +5,7 @@ import ProgressBar from "../../../../components/ProgressBar";
 import "./Upload.css";
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 function Upload({ onCardsGenerated }) {
   // Receive the onCardsGenerated prop
@@ -16,6 +17,7 @@ function Upload({ onCardsGenerated }) {
   const [loading, setLoading] = useState(false); // State to track loading
   const fileInputRef = useRef(null);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
   const handleImageChange = (files) => {
     setShowSendOffButton(false); // Hide the "Send off" button when new images are uploaded
@@ -53,7 +55,11 @@ function Upload({ onCardsGenerated }) {
         // console.log("Full API Response:", response.data); // Log full API response for debugging
       })
       .catch((error) => {
-        console.error("Error creating card:", error);
+        // console.error("Error creating card:", error);
+        if (error.status === 401) {
+          localStorage.removeItem("user");
+          navigate("/login");
+        }
         setErrorMsg("Card creation failed. Please try again.");
       })
       .finally(() => {

@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+from .logging import FORMATTERS, HANDLERS, LOGGERS
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,19 +30,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SECRET_KEY = config(
     "DJANGO_SECRET_KEY",
     cast=str,
-    default='django-insecure-077(kte%zl$*ks@8h0-jqxn%mvsfr1%35t!_5quwlv)1fxw9+p'
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', '.catalog-trading.fun']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.catalog-trading.fun']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Vite Development Server
     'http://localhost:3000',  # Docker Dev Frontend Server
     'http://localhost:8000',  # Docker Dev Backend Server
     'http://127.0.0.1:8000',  # Django Dev Server
     'https://catalog-trading.fun',  # Production Frontend Server
+    'https://www.catalog-trading.fun', # Production Frontend Server
     'https://api.catalog-trading.fun',  # Production Backend Server
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -92,7 +93,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -145,18 +145,25 @@ DATABASES = {
         'PORT': '5432',       # Default port for PostgreSQL
     }
 }
-
 AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
 }
+
+if not DEBUG:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = (
+        "rest_framework.renderers.JSONRenderer",
+    )
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
 SWAGGER_SETTINGS = {
@@ -170,6 +177,19 @@ SWAGGER_SETTINGS = {
             'in': 'header'
       }
    }
+}
+
+# logging configurations
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": FORMATTERS[0],
+    "handlers": HANDLERS,
+    "loggers": LOGGERS[0],
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console"],
+    }
 }
 
 
