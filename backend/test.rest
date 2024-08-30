@@ -2,14 +2,14 @@
 POST http://localhost:8000/api/auth/register/ 
 Content-Type: application/json
 
-{ "email": "johndoe@gmail.com" , "password": "Pass1234", "firstName": "John", "lastName": "Doe" }
+{ "email": "johndoe@gmail.com" , "password": "Pass4", "firstName": "John", "lastName": "Doe" }
 
 ###
 
 POST http://localhost:8000/api/auth/login/
 Content-Type: application/json
 
-{ "email": "johndoe@gmail.com", "password": "Pass1234" }
+{ "email": "johndoe@gmail.com", "password": "Pass134" }
 
 ###
 
