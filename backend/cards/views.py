@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated
@@ -150,7 +149,7 @@ def create_card(request):
                 img = cv2.imread(file_path)
                 if img is None:
                     logger.error(f"Failed to read image at {file_path}")
-                    return JsonResponse({'status': 'error', 'message': f'Failed to process image: {image.name}'}, status=400)
+                    return Response(data={'message': f'Failed to process image: {image.name}'}, status=status.HTTP_400_BAD_REQUEST)
 
                 # Initialize mask, background, and foreground models for GrabCut
                 mask = np.zeros(img.shape[:2], np.uint8)
@@ -174,14 +173,14 @@ def create_card(request):
 
                 if not description:
                     logger.error("Failed to get description from OpenAI API.")
-                    return JsonResponse({'status': 'error', 'message': 'Failed to get description from OpenAI API.'}, status=500)
+                    return Response(data={'message': 'Failed to get description from OpenAI API.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
                 # Call your Replicate API to generate an image based on the description
                 output_images = generate_image(description)
 
                 if not output_images:
                     logger.error(f"Failed to generate image with Replicate for description: {description}")
-                    return JsonResponse({'status': 'error', 'message': f'Failed to generate image for: {image.name}'}, status=400)
+                    return Response(data={'message': f'Failed to generate image for: {image.name}'}, status=status.HTTP_400_BAD_REQUEST)
 
                 # Generate a detailed paragraph about the cat using a second prompt with OpenAI
                 detailed_prompt = (
@@ -195,7 +194,7 @@ def create_card(request):
 
                 if not detailed_description:
                     logger.error("Failed to get detailed description from OpenAI API.")
-                    return JsonResponse({'status': 'error', 'message': 'Failed to get detailed description from OpenAI API.'}, status=500)
+                    return Response(data={'message': 'Failed to get detailed description from OpenAI API.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
                 # Extract breed and fun facts
                 detailed_description_lines = detailed_description.split("\n")

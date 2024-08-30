@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+from .logging import FORMATTERS, HANDLERS, LOGGERS
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',  # Docker Dev Backend Server
     'http://127.0.0.1:8000',  # Django Dev Server
     'https://catalog-trading.fun',  # Production Frontend Server
+    'https://www.catalog-trading.fun', # Production Frontend Server
     'https://api.catalog-trading.fun',  # Production Backend Server
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -175,6 +177,19 @@ SWAGGER_SETTINGS = {
             'in': 'header'
       }
    }
+}
+
+# logging configurations
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": FORMATTERS[0],
+    "handlers": HANDLERS,
+    "loggers": LOGGERS[0],
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console"],
+    }
 }
 
 

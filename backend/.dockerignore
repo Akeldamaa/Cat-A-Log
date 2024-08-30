@@ -118,3 +118,4 @@ dmypy.json
 test.rest
 sample.env
 media/
+logs
